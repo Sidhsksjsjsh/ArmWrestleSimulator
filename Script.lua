@@ -216,7 +216,7 @@ T4:AddToggle({
   end    
 })
 
-T3:AddToggle({
+T4:AddToggle({
   Name = "Auto Hatch",
   Default = false,
   Callback = function(Value)
@@ -251,11 +251,23 @@ T3:AddToggle({
   end    
 })
 
+T4:AddToggle({
+  Name = "Auto Equip Best",
+  Default = false,
+  Callback = function(Value)
+  _G.EB = Value
+    while wait() do
+      if _G.EB == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.PetService.RF.equipBest:InvokeServer(game:GetService("Players").LocalPlayer)
+      end
+  end    
+})
+
 local weight = {"1Kg","2Kg","3Kg","4Kg","5Kg","10Kg","15Kg","20Kg","25Kg","50Kg","100Kg","250Kg"}
 
 T1:AddDropdown({
    Name = "select weight",
-   Default = "Earth",
+   Default = "1Kg",
    Options = weight,
    Callback = function(Value)
      _G.Prototype_A1 = Value

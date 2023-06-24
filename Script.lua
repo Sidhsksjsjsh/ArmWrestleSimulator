@@ -26,10 +26,16 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
+local T5 = Window:MakeTab({
+Name = "Pet",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
 local workspace = game:GetService("Workspace")
 local npc = {}
 local zone = {}
-
+local egg = {}
 function AddTable(Table_V,LocalName)
 for _,v in pairs(Table_V:GetChildren()) do
     table.insert(LocalName,v.Name)
@@ -39,6 +45,7 @@ end
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["3"].Interactables.ArmWrestling.NPC,npc)
+AddTable(workspace.Folder.Eggs,egg)
 
 --[[
 T1:AddToggle({
@@ -141,10 +148,13 @@ T3:AddToggle({
   end    
 })
 
+local eggList = workspace.Folder.Eggs[egg].Details.Floor.SurfaceGui.EggName.Text
+local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon"}
+
 T4:AddDropdown({
    Name = "Select EGG",
    Default = "Earth",
-   Options = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon"},
+   Options = workspace.Folder.Eggs[egg].Details.Floor.SurfaceGui.EggName.Text,
    Callback = function(Value)
      _G.Egg = Value
    end    
@@ -304,8 +314,36 @@ T4:AddToggle({
       end
   end    
 })
+--[[
+T5:AddToggle({
+  Name = "Auto Gold",
+  Default = false,
+  Callback = function(Value)
+  _G.Dmb = Value
+    while wait() do
+      if _G.Dmb == false then break end
+        if _G.JoinW == false and _G.ClickW == false then
+           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer(_G.zone_1,"Dumbells",_G.Prototype_A1)
+        end
+      end
+  end    
+})
 
-T4:AddToggle({
+T5:AddToggle({
+  Name = "Auto Craft",
+  Default = false,
+  Callback = function(Value)
+  _G.Dmb = Value
+    while wait() do
+      if _G.Dmb == false then break end
+        if _G.JoinW == false and _G.ClickW == false then
+           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer(_G.zone_1,"Dumbells",_G.Prototype_A1)
+        end
+      end
+  end    
+})
+--]]
+T5:AddToggle({
   Name = "Auto Equip Best",
   Default = false,
   Callback = function(Value)

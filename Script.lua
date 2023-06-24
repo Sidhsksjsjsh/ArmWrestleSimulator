@@ -20,6 +20,12 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
+local T4 = Window:MakeTab({
+Name = "Egg",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
 local workspace = game:GetService("Workspace")
 local npc = {}
 local zone = {}
@@ -45,6 +51,217 @@ T1:AddToggle({
   end    
 })
 --]]
+
+local treadmill = {
+      Tier = "Tier1",
+      Number = 1
+}
+
+T2:AddDropdown({
+  Name = "Select Treadmill",
+  Default = "Tier1",
+  Options = {"Tier1","Tier2","Tier3","Tier4","Tier5","Tier6"},
+  Callback = function(Value)
+    treadmill.Tier = Value
+  end    
+})
+
+T2:AddToggle({
+  Name = "Auto Treadmill",
+  Default = false,
+  Callback = function(Value)
+  _G.Tm = Value
+    while wait() do
+      if _G.Tm == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TreadmillService.RE.onGiveStats:FireServer(treadmill.Number,treadmill.Tier)
+      end
+  end    
+})
+
+T3:AddDropdown({
+   Name = "Select NPC",
+   Default = "Bully",
+   Options = npc,
+   Callback = function(Value)
+     _G.AI = Value
+   end    
+})
+
+T3:AddToggle({
+  Name = "Auto Wrestle",
+  Default = false,
+  Callback = function(Value)
+  _G.JoinW = Value
+    while wait() do
+      if _G.JoinW == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer(_G.AI,workspace.Zones["1"].Interactables.ArmWrestling.NPC[_G.AI],"1")
+      end
+  end    
+})
+
+T3:AddToggle({
+  Name = "Auto Click",
+  Default = false,
+  Callback = function(Value)
+  _G.ClickW = Value
+    while wait() do
+      if _G.ClickW == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
+      end
+  end    
+})
+
+T4:AddDropdown({
+   Name = "Select EGG",
+   Default = "Earth",
+   Options = {"Earth","Icy","Blackhole","Lava"},
+   Callback = function(Value)
+     _G.Egg = Value
+   end    
+})
+
+local common = {
+      mouse = false,
+      squirrel = false,
+      cat = false
+}
+
+T4:AddToggle({
+  Name = "Blacklist common pet",
+  Default = false,
+  Callback = function(Value)
+    common.mouse = Value
+    common.squirrel = Value
+    common.cat = false
+  end    
+})
+
+local uncommon = {
+      dog = false,
+      cow = false,
+      deer = false,
+      parrot = false
+}
+
+T4:AddToggle({
+  Name = "Blacklist uncommon pet",
+  Default = false,
+  Callback = function(Value)
+    uncommon.dog = Value
+    uncommon.cow = Value
+    uncommon.deer = Value
+    uncommon.parrot = Value
+  end    
+})
+
+local rare = {
+      fox = false
+}
+
+T4:AddToggle({
+  Name = "Blacklist rare pet",
+  Default = false,
+  Callback = function(Value)
+    rare.fox = Value
+  end    
+})
+
+local legendary = {
+      mouse = false,
+      bear = false,
+      slime = false,
+      grassmage = false,
+      monkey = false,
+      tiger = false
+}
+
+T4:AddToggle({
+  Name = "Blacklist legendary pet",
+  Default = false,
+  Callback = function(Value)
+    legendary.mouse = Value
+    legendary.bear = Value
+    legendary.slime = Value
+    legendary.grassmage = Value
+    legendary.monkey = Value
+    legendary.tiger = Value
+  end    
+})
+
+local mythical = {
+      watermage = false,
+      elephant = false
+}
+
+T4:AddToggle({
+  Name = "Blacklist mythical pet",
+  Default = false,
+  Callback = function(Value)
+    mythical.watermage = Value
+    mythical.elephant = Value
+  end    
+})
+
+local unknown = {
+      magicmage = false,
+      spooky = false
+}
+
+T4:AddToggle({
+  Name = "Blacklist Unknown pet (Blackhole Egg)",
+  Default = false,
+  Callback = function(Value)
+    unknown.magicmage = Value
+    unknown.spooky = Value
+  end    
+})
+
+T3:AddToggle({
+  Name = "Auto Hatch",
+  Default = false,
+  Callback = function(Value)
+  _G.Balls = Value
+    while wait() do
+      if _G.Balls == false then break end
+         local args = {
+           [1] = _G.Egg,
+           [2] = {
+              ["Fox"] = rare.fox,
+              ["Slime"] = legendary.slime,
+              ["Bear"] = legendary.bear,
+              ["Deer"] = uncommon.deer,
+              ["Squirrel"] = common.squirrel,
+              ["WaterMage"] = mythical.watermage,
+              ["GrassMage"] = legendary.grassmage,
+              ["Spooky"] = unknown.spooky,
+              ["MagicMage"] = unknown.magicmage,
+              ["Monkey"] = legendary.monkey,
+              ["Parrot"] = uncommon.parot,
+              ["Tiger"] = legendary.tiger,
+              ["Elephant"] = mythical.elephant,
+              ["Cat"] = common.cat,
+              ["Dog"] = uncommon.dog,
+              ["Cow"] = uncommon.cow,
+              ["Mouse"] = legendary.mouse
+          }
+      }
+
+      game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(unpack(args))
+      end
+  end    
+})
+
+local weight = {"1Kg","2Kg","3Kg","4Kg","5Kg","10Kg","15Kg","20Kg","25Kg","50Kg","100Kg","250Kg"}
+
+T1:AddDropdown({
+   Name = "select weight",
+   Default = "Earth",
+   Options = weight,
+   Callback = function(Value)
+     _G.Prototype_A1 = Value
+     _G.Prototype_A2 = Value
+   end    
+})
 
 T1:AddToggle({
   Name = "Auto Click",
@@ -105,79 +322,30 @@ T1:AddToggle({
   end    
 })
 
-local treadmill = {
-      Tier = "Tier1",
-      Number = 1
-}
-
-T2:AddDropdown({
-  Name = "Select Treadmill",
-  Default = "Tier1",
-  Options = {"Tier1","Tier2","Tier3","Tier4","Tier5","Tier6"},
+T1:AddToggle({
+  Name = "Auto Equip Dumbells",
+  Default = false,
   Callback = function(Value)
-    treadmill.Tier = Value
-      if treadmill.Tier == "Tier1" then
-         treadmill.Number = 1
-      end
-      if treadmill.Tier == "Tier2" then
-         treadmill.Number = 2
-      end
-      if treadmill.Tier == "Tier3" then
-         treadmill.Number = 3
-      end
-      if treadmill.Tier == "Tier4" then
-         treadmill.Number = 4
-      end
-      if treadmill.Tier == "Tier5" then
-         treadmill.Number = 5
-      end
-      if treadmill.Tier == "Tier6" then
-         treadmill.Number = 6
+  _G.Dmb = Value
+    while wait() do
+      if _G.Dmb == false then break end
+        if _G.JoinW == false and _G.ClickW == false then
+           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer("1","Dumbells",_G.Prototype_A1)
+        end
       end
   end    
 })
 
-T2:AddToggle({
-  Name = "Auto Treadmill",
+T1:AddToggle({
+  Name = "Auto Equip Grips",
   Default = false,
   Callback = function(Value)
-  _G.Tm = Value
+  _G.Grips = Value
     while wait() do
-      if _G.Tm == false then break end
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TreadmillService.RE.onGiveStats:FireServer(treadmill.Number,treadmill.Tier)
-      end
-  end    
-})
-
-T3:AddDropdown({
-   Name = "Select NPC",
-   Default = "Bully",
-   Options = npc,
-   Callback = function(Value)
-     _G.AI = Value
-   end    
-})
-
-T3:AddToggle({
-  Name = "Auto Wrestle",
-  Default = false,
-  Callback = function(Value)
-  _G.JoinW = Value
-    while wait() do
-      if _G.JoinW == false then break end
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer(_G.AI,workspace.Zones["1"].Interactables.ArmWrestling.NPC[_G.AI],"1")
-      end
-  end    
-})
-
-T3:AddToggle({
-  Name = "Auto Click",
-  Default = false,
-  Callback = function(Value)
-  _G.ClickW = Value
-    while wait() do
-      if _G.ClickW == false then break end
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
+      if _G.Grips == false then break end
+         if _G.JoinW == false and _G.ClickW == false then
+           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer("1","Grips",_G.Prototype_A2)
+        end
       end
   end    
 })

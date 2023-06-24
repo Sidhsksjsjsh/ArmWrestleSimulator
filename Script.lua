@@ -37,6 +37,7 @@ end
 end
 
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
+AddTable(workspace.Zones["2"].Interactables.ArmWrestling.NPC,npc)
 
 --[[
 T1:AddToggle({
@@ -56,6 +57,34 @@ local treadmill = {
       Tier = "Tier1",
       Number = 1
 }
+
+T1:AddDropdown({
+   Name = "Select Zone",
+   Default = "1",
+   Options = {"1", "2"},
+   Callback = function(Value)
+     _G.zone_1 = Value
+  end    
+})
+
+T2:AddDropdown({
+   Name = "Select Zone",
+   Default = "1",
+   Options = {"1", "2"},
+   Callback = function(Value)
+     _G.zone_2 = Value
+    treadmill.Number = tonumber(Value)
+  end    
+})
+
+T3:AddDropdown({
+   Name = "Select Zone",
+   Default = "1",
+   Options = {"1", "2"},
+   Callback = function(Value)
+     _G.zone_3 = Value
+  end    
+})
 
 T2:AddDropdown({
   Name = "Select Treadmill",
@@ -94,7 +123,7 @@ T3:AddToggle({
   _G.JoinW = Value
     while wait() do
       if _G.JoinW == false then break end
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer(_G.AI,workspace.Zones["1"].Interactables.ArmWrestling.NPC[_G.AI],"1")
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer(_G.AI,workspace.Zones[_G.zone_3].Interactables.ArmWrestling.NPC[_G.AI],_G.zone_3)
       end
   end    
 })
@@ -114,12 +143,12 @@ T3:AddToggle({
 T4:AddDropdown({
    Name = "Select EGG",
    Default = "Earth",
-   Options = {"Earth","Icy","Blackhole","Lava"},
+   Options = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon"},
    Callback = function(Value)
      _G.Egg = Value
    end    
 })
-
+--[[
 local common = {
       mouse = false,
       squirrel = false,
@@ -155,7 +184,8 @@ T4:AddToggle({
 })
 
 local rare = {
-      fox = false
+      fox = false,
+      wolf = false,
 }
 
 T4:AddToggle({
@@ -172,7 +202,8 @@ local legendary = {
       slime = false,
       grassmage = false,
       monkey = false,
-      tiger = false
+      tiger = false,
+      unicorn = false,
 }
 
 T4:AddToggle({
@@ -190,7 +221,8 @@ T4:AddToggle({
 
 local mythical = {
       watermage = false,
-      elephant = false
+      elephant = false,
+      astra = false,
 }
 
 T4:AddToggle({
@@ -204,7 +236,9 @@ T4:AddToggle({
 
 local unknown = {
       magicmage = false,
-      spooky = false
+      spooky = false,
+      quasar = false,
+      axeli = false,
 }
 
 T4:AddToggle({
@@ -215,7 +249,7 @@ T4:AddToggle({
     unknown.spooky = Value
   end    
 })
-
+--]]
 T4:AddToggle({
   Name = "Auto Hatch",
   Default = false,
@@ -223,7 +257,7 @@ T4:AddToggle({
   _G.Balls = Value
     while wait() do
       if _G.Balls == false then break end
-         local args = {
+         --[[local args = {
            [1] = _G.Egg,
            [2] = {
               ["Fox"] = rare.fox,
@@ -242,11 +276,30 @@ T4:AddToggle({
               ["Cat"] = common.cat,
               ["Dog"] = uncommon.dog,
               ["Cow"] = uncommon.cow,
-              ["Mouse"] = legendary.mouse
+              ["Mouse"] = legendary.mouse,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              
           }
       }
-
-      game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(unpack(args))
+--]]
+      game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(_G.Egg,{})
       end
   end    
 })
@@ -342,7 +395,7 @@ T1:AddToggle({
     while wait() do
       if _G.Dmb == false then break end
         if _G.JoinW == false and _G.ClickW == false then
-           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer("1","Dumbells",_G.Prototype_A1)
+           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer(_G.zone_1,"Dumbells",_G.Prototype_A1)
         end
       end
   end    
@@ -356,7 +409,7 @@ T1:AddToggle({
     while wait() do
       if _G.Grips == false then break end
          if _G.JoinW == false and _G.ClickW == false then
-           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer("1","Grips",_G.Prototype_A2)
+           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer(_G.zone_1,"Grips",_G.Prototype_A2)
         end
       end
   end    

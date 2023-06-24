@@ -38,6 +38,7 @@ end
 
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.NPC,npc)
+AddTable(workspace.Zones["3"].Interactables.ArmWrestling.NPC,npc)
 
 --[[
 T1:AddToggle({
@@ -55,13 +56,13 @@ T1:AddToggle({
 
 local treadmill = {
       Tier = "Tier1",
-      Number = 1
+      Number = "1"
 }
 
 T1:AddDropdown({
    Name = "Select Zone",
    Default = "1",
-   Options = {"1", "2"},
+   Options = {"1","2","3"},
    Callback = function(Value)
      _G.zone_1 = Value
   end    
@@ -70,7 +71,7 @@ T1:AddDropdown({
 T2:AddDropdown({
    Name = "Select Zone",
    Default = "1",
-   Options = {"1", "2"},
+   Options = {"1","2","3"},
    Callback = function(Value)
      _G.zone_2 = Value
     treadmill.Number = Value
@@ -80,29 +81,29 @@ T2:AddDropdown({
 T3:AddDropdown({
    Name = "Select Zone",
    Default = "1",
-   Options = {"1", "2"},
+   Options = {"1","2","3"},
    Callback = function(Value)
      _G.zone_3 = Value
   end    
 })
 
 T2:AddDropdown({
-  Name = "Select Treadmill",
+  Name = "Select Punch Tier",
   Default = "Tier1",
-  Options = {"Tier1","Tier2","Tier3","Tier4","Tier5","Tier6"},
+  Options = {"Tier1","Tier2","Tier3","Tier4","Tier5","Tier6","Tier7","Tier8","Tier9","Tier10","Tier11","Tier12","Tier13","Tier14","Tier15","Tier16","Tier17","Tier18"},
   Callback = function(Value)
     treadmill.Tier = Value
   end    
 })
 
 T2:AddToggle({
-  Name = "Auto Treadmill",
+  Name = "Auto Punch",
   Default = false,
   Callback = function(Value)
   _G.Tm = Value
     while wait() do
       if _G.Tm == false then break end
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TreadmillService.RE.onGiveStats:FireServer(treadmill.Number,treadmill.Tier)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.PunchBagService.RE.onGiveStats:FireServer(treadmill.Number,treadmill.Tier)
       end
   end    
 })
@@ -317,7 +318,7 @@ T4:AddToggle({
 })
 
 local weight = {"1Kg","2Kg","3Kg","4Kg","5Kg","10Kg","15Kg","20Kg","25Kg","50Kg","100Kg","250Kg"}
-
+--[[
 T1:AddDropdown({
    Name = "select weight",
    Default = "1Kg",
@@ -327,7 +328,7 @@ T1:AddDropdown({
      _G.Prototype_A2 = Value
    end    
 })
-
+--]]
 T1:AddToggle({
   Name = "Auto Click",
   Default = false,
@@ -386,7 +387,7 @@ T1:AddToggle({
       end
   end    
 })
-
+--[[
 T1:AddToggle({
   Name = "Auto Equip Dumbells",
   Default = false,
@@ -414,3 +415,4 @@ T1:AddToggle({
       end
   end    
 })
+--]]

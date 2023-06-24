@@ -9,7 +9,7 @@ PremiumOnly = false
 })
 
 local T2 = Window:MakeTab({
-Name = "Treadmill",
+Name = "Punch",
 Icon = "rbxassetid://0",
 PremiumOnly = false
 })
@@ -73,7 +73,7 @@ T2:AddDropdown({
    Options = {"1", "2"},
    Callback = function(Value)
      _G.zone_2 = Value
-    treadmill.Number = tonumber(Value)
+    treadmill.Number = Value
   end    
 })
 

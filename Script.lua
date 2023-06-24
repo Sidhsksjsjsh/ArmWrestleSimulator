@@ -24,11 +24,13 @@ local workspace = game:GetService("Workspace")
 local npc = {}
 local zone = {}
 
-function AddTable(Table_1,LocalName)
-for _,v in pairs(Table_1:GetChildren()) do
+function AddTable(Table_V,LocalName)
+for _,v in pairs(Table_V:GetChildren()) do
     table.insert(LocalName,v.Name)
 end
 end
+
+AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
 
 --[[
 T1:AddToggle({
@@ -147,9 +149,7 @@ T2:AddToggle({
   end    
 })
 
-AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
-
-Tab:AddDropdown({
+T3:AddDropdown({
    Name = "Select NPC",
    Default = "Bully",
    Options = npc,

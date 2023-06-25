@@ -148,13 +148,12 @@ T3:AddToggle({
   end    
 })
 
--- local eggList = workspace.Folder.Eggs[egg].Details.Floor.SurfaceGui.EggName.Text
 local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon"}
 
 T4:AddDropdown({
    Name = "Select EGG",
    Default = "Earth",
-   Options = dislist, -- workspace.Folder.Eggs[egg].Details.Floor.SurfaceGui.EggName.Text
+   Options = dislist,
    Callback = function(Value)
      _G.Egg = Value
    end    

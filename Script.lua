@@ -97,7 +97,7 @@ T3:AddDropdown({
 T2:AddDropdown({
   Name = "Select Punch Tier",
   Default = "Tier1",
-  Options = {"Tier1","Tier2","Tier3","Tier4","Tier5","Tier6","Tier7","Tier8","Tier9","Tier10","Tier11","Tier12","Tier13","Tier14","Tier15","Tier16","Tier17","Tier18"},
+  Options = {"Tier1","Tier2","Tier3","Tier4","Tier5","Tier6"},
   Callback = function(Value)
     treadmill.Tier = Value
   end    
@@ -154,7 +154,7 @@ local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=",
 T4:AddDropdown({
    Name = "Select EGG",
    Default = "Earth",
-   Options = workspace.Folder.Eggs[egg].Details.Floor.SurfaceGui.EggName.Text,
+   Options = dislist, -- workspace.Folder.Eggs[egg].Details.Floor.SurfaceGui.EggName.Text
    Callback = function(Value)
      _G.Egg = Value
    end    

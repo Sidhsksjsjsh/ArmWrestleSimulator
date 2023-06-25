@@ -20,6 +20,18 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
+local S3 = T3:AddSection({
+     Name = "SELECT ZONE / MAP"
+})
+
+local S1 = T3:AddSection({
+     Name = "VS BOT"
+})
+
+local S2 = T3:AddSection({
+     Name = "VS PLAYER"
+})
+
 local T4 = Window:MakeTab({
 Name = "Egg",
 Icon = "rbxassetid://0",
@@ -36,15 +48,21 @@ local workspace = game:GetService("Workspace")
 local npc = {}
 local zone = {}
 local egg = {}
+local VSPLAYER = {}
 function AddTable(Table_V,LocalName)
 for _,v in pairs(Table_V:GetChildren()) do
     table.insert(LocalName,v.Name)
 end
 end
 
+AddTable(workspace.Zones,zone)
+
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["3"].Interactables.ArmWrestling.NPC,npc)
+AddTable(workspace.Zones["1"].Interactables.ArmWrestling.PVP,VSPLAYER)
+AddTable(workspace.Zones["2"].Interactables.ArmWrestling.PVP,VSPLAYER)
+AddTable(workspace.Zones["3"].Interactables.ArmWrestling.PVP,VSPLAYER)
 -- AddTable(workspace.Folder.Eggs,egg)
 
 --[[
@@ -69,7 +87,7 @@ local treadmill = {
 T1:AddDropdown({
    Name = "Select Zone",
    Default = "1",
-   Options = {"1","2","3"},
+   Options = zone,
    Callback = function(Value)
      _G.zone_1 = Value
   end    
@@ -78,17 +96,17 @@ T1:AddDropdown({
 T2:AddDropdown({
    Name = "Select Zone",
    Default = "1",
-   Options = {"1","2","3"},
+   Options = zone,
    Callback = function(Value)
      _G.zone_2 = Value
     treadmill.Number = Value
   end    
 })
 
-T3:AddDropdown({
+S3:AddDropdown({
    Name = "Select Zone",
    Default = "1",
-   Options = {"1","2","3"},
+   Options = zone,
    Callback = function(Value)
      _G.zone_3 = Value
   end    
@@ -115,7 +133,7 @@ T2:AddToggle({
   end    
 })
 
-T3:AddDropdown({
+S1:AddDropdown({
    Name = "Select NPC",
    Default = "Bully",
    Options = npc,
@@ -124,7 +142,7 @@ T3:AddDropdown({
    end    
 })
 
-T3:AddToggle({
+S1:AddToggle({
   Name = "Auto Wrestle",
   Default = false,
   Callback = function(Value)
@@ -136,7 +154,7 @@ T3:AddToggle({
   end    
 })
 
-T3:AddToggle({
+S1:AddToggle({
   Name = "Auto Click",
   Default = false,
   Callback = function(Value)
@@ -148,7 +166,40 @@ T3:AddToggle({
   end    
 })
 
-local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon"}
+S2:AddDropdown({
+   Name = "Select Table",
+   Default = "ArmWrestleTable4",
+   Options = VSPLAYER,
+   Callback = function(Value)
+     _G.TABLE_VSPLAYER = Value
+   end    
+})
+
+S2:AddToggle({
+  Name = "Auto Enter Table",
+  Default = false,
+  Callback = function(Value)
+  _G.ENTERTABLE = Value
+    while wait() do
+      if _G.ENTERTABLE == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterTable:FireServer(workspace.Zones[_G.zone_3].Interactables.ArmWrestling.PVP[_G.TABLE_VSPLAYER])
+      end
+  end    
+})
+
+S2:AddToggle({
+  Name = "Auto Click",
+  Default = false,
+  Callback = function(Value)
+  _G.CLICKVSPLAYER = Value
+    while wait() do
+      if _G.CLICKVSPLAYER == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
+      end
+  end    
+})
+
+local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon",",=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam"}
 
 T4:AddDropdown({
    Name = "Select EGG",

@@ -45,7 +45,7 @@ end
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["3"].Interactables.ArmWrestling.NPC,npc)
-AddTable(workspace.Folder.Eggs,egg)
+-- AddTable(workspace.Folder.Eggs,egg)
 
 --[[
 T1:AddToggle({

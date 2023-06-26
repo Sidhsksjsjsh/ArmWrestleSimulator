@@ -1,6 +1,7 @@
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = true, ConfigFolder = "TurtleFi"})
+local TweenService = game:GetService("TweenService")
 
 local T1 = Window:MakeTab({
 Name = "Farm",
@@ -33,13 +34,19 @@ local S2 = T3:AddSection({
 })
 
 local T4 = Window:MakeTab({
-Name = "Egg",
+Name = "Egg & Pet",
 Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
 local T5 = Window:MakeTab({
-Name = "Pet",
+Name = "Teleport",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
+local T6 = Window:MakeTab({
+Name = "Config",
 Icon = "rbxassetid://0",
 PremiumOnly = false
 })
@@ -79,6 +86,24 @@ T1:AddToggle({
 })
 --]]
 
+function TPType(type,pos)
+   if type == "tween" then
+          TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0), {CFrame = pos}):Play()
+   end
+   if type == "teleport" then
+          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+     end
+end
+
+function CreateDialogue(title,desc)
+OrionLib:MakeNotification({
+   Name = title,
+   Content = desc,
+   Image = "rbxassetid://0",
+   Time = 5
+  })
+end
+
 local treadmill = {
       Tier = "Tier1",
       Number = "1"
@@ -109,6 +134,67 @@ S3:AddDropdown({
    Options = zone,
    Callback = function(Value)
      _G.zone_3 = Value
+  end    
+})
+
+T5:AddDropdown({
+   Name = "Select Zone",
+   Default = "1",
+   Options = zone,
+   Callback = function(Value)
+     _G.zone_TP = Value
+  end    
+})
+
+T5:AddDropdown({
+   Name = "Select the teleportation type",
+   Default = "teleport",
+   Options = {"teleport","tween"},
+   Callback = function(Value)
+     _G.TP_TYPE = Value
+  end    
+})
+
+T6:AddButton({ -- fake API, THE ORIGINAL API IS IN THE UI
+  Name = "Infinite Biceps / dumbells [ Patched ]",
+  Callback = function()
+      CreateDialogue("HTTP BAD GATEWAY (505)","this feature has been patched, our API is blocked by anti-cheat.")
+  end    
+})
+
+T6:AddButton({ -- fake API, THE ORIGINAL API IS IN THE UI
+  Name = "Infinite Wins / Trophy [ Patched ]",
+  Callback = function()
+      CreateDialogue("HTTP BAD GATEWAY (505)","this feature has been patched, our API is blocked by anti-cheat.")
+  end    
+})
+
+T6:AddButton({ -- fake API, THE ORIGINAL API IS IN THE UI
+  Name = "Infinite Knuckles [ Patched ]",
+  Callback = function()
+      CreateDialogue("HTTP BAD GATEWAY (505)","this feature has been patched, our API is blocked by anti-cheat.")
+  end    
+})
+
+T6:AddButton({ -- fake API, THE ORIGINAL API IS IN THE UI
+  Name = "Infinite Grips [ Patched ]",
+  Callback = function()
+      CreateDialogue("HTTP BAD GATEWAY (505)","this feature has been patched, our API is blocked by anti-cheat.")
+  end    
+})
+
+T5:AddButton({
+  Name = "Teleport",
+  Callback = function()
+     if _G.zone_TP == "1" then
+        TPType(_G.TP_TYPE,CFrame.new(-10326,4,34))
+    end
+     if _G.zone_TP == "2" then
+        TPType(_G.TP_TYPE,CFrame.new(-10324,4,448))
+     end
+     if _G.zone_TP == "3" then
+        TPType(_G.TP_TYPE,CFrame.new(11599,10,-19))
+    end
   end    
 })
 
@@ -168,7 +254,7 @@ S1:AddToggle({
 
 S2:AddDropdown({
    Name = "Select Table",
-   Default = "ArmWrestleTable4",
+   Default = "ArmWrestleTable1",
    Options = VSPLAYER,
    Callback = function(Value)
      _G.TABLE_VSPLAYER = Value
@@ -199,7 +285,7 @@ S2:AddToggle({
   end    
 })
 
-local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon",",=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam"}
+local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam"}
 
 T4:AddDropdown({
    Name = "Select EGG",
@@ -393,7 +479,7 @@ T5:AddToggle({
   end    
 })
 --]]
-T5:AddToggle({
+T4:AddToggle({
   Name = "Auto Equip Best",
   Default = false,
   Callback = function(Value)

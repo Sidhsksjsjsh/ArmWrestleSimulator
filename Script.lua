@@ -39,6 +39,21 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
+local S4 = T4:AddSection({
+     Name = "Golden (Use Private Server)"
+})
+
+local Detection_A1 = S4:AddParagraph("Pet detection (in workspace)","#PET_DETECTION_ERROR")
+
+local S5 = T4:AddSection({
+     Name = "Craft (Use Private Server)"
+})
+
+local Detection_A2 = S5:AddParagraph("Pet detection (in workspace)","#PET_DETECTION_ERROR")
+
+local PetDetect = 0
+PetDetect = #petIndex
+
 local T5 = Window:MakeTab({
 Name = "Teleport",
 Icon = "rbxassetid://0",
@@ -46,7 +61,7 @@ PremiumOnly = false
 })
 
 local T6 = Window:MakeTab({
-Name = "Config",
+Name = "Boost",
 Icon = "rbxassetid://0",
 PremiumOnly = false
 })
@@ -56,6 +71,7 @@ local npc = {}
 local zone = {}
 local egg = {}
 local VSPLAYER = {}
+local petIndex = {}
 function AddTable(Table_V,LocalName)
 for _,v in pairs(Table_V:GetChildren()) do
     table.insert(LocalName,v.Name)
@@ -70,7 +86,9 @@ AddTable(workspace.Zones["3"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.PVP,VSPLAYER)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.PVP,VSPLAYER)
 AddTable(workspace.Zones["3"].Interactables.ArmWrestling.PVP,VSPLAYER)
--- AddTable(workspace.Folder.Eggs,egg)
+AddTable(workspace.PetFolder,petIndex)
+
+local PetDetect = #petIndex
 
 --[[
 T1:AddToggle({
@@ -109,12 +127,12 @@ local treadmill = {
       Number = "1"
 }
 
-T1:AddDropdown({
-   Name = "Select Zone",
-   Default = "1",
-   Options = zone,
+T6:AddDropdown({
+   Name = "Select Boost",
+   Default = "Luck",
+   Options = {"Luck","Golden","Void"},
    Callback = function(Value)
-     _G.zone_1 = Value
+     _G.BoostPoison = Value
   end    
 })
 
@@ -154,7 +172,7 @@ T5:AddDropdown({
      _G.TP_TYPE = Value
   end    
 })
-
+--[[
 T6:AddButton({ -- fake API, THE ORIGINAL API IS IN THE UI
   Name = "Infinite Biceps / dumbells [ Patched ]",
   Callback = function()
@@ -182,7 +200,7 @@ T6:AddButton({ -- fake API, THE ORIGINAL API IS IN THE UI
       CreateDialogue("HTTP BAD GATEWAY (505)","this feature has been patched, our API is blocked by anti-cheat.")
   end    
 })
-
+--]]
 T5:AddButton({
   Name = "Teleport",
   Callback = function()
@@ -450,31 +468,29 @@ T4:AddToggle({
       end
   end    
 })
---[[
-T5:AddToggle({
+
+S4:AddToggle({
   Name = "Auto Gold",
   Default = false,
   Callback = function(Value)
-  _G.Dmb = Value
+  _G.GoldPet = Value
     while wait() do
-      if _G.Dmb == false then break end
-        if _G.JoinW == false and _G.ClickW == false then
-           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer(_G.zone_1,"Dumbells",_G.Prototype_A1)
-        end
-      end
+      if _G.GoldPet == false then break end
+        local PatchGold = petIndex[math.random(1, #petIndex)]
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.PetService.RF.goldify:InvokeServer({PatchGold,PatchGold,PatchGold,PatchGold,PatchGold})
+     end
   end    
 })
 
-T5:AddToggle({
+S5:AddToggle({
   Name = "Auto Craft",
   Default = false,
   Callback = function(Value)
-  _G.Dmb = Value
+  _G.Crafter = Value
     while wait() do
-      if _G.Dmb == false then break end
-        if _G.JoinW == false and _G.ClickW == false then
-           game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onGuiEquipRequest:FireServer(_G.zone_1,"Dumbells",_G.Prototype_A1)
-        end
+      if _G.Crafter == false then break end
+        local MasterCraft = petIndex[math.random(1, #petIndex)]
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.PetService.RF.craft:InvokeServer(MasterCraft,true)
       end
   end    
 })
@@ -590,3 +606,37 @@ T1:AddToggle({
   end    
 })
 --]]
+
+T6:AddToggle({
+  Name = "Use Selected Boost",
+  Default = false,
+  Callback = function(Value)
+  _G.UseBoost = Value
+    while wait() do
+      if _G.UseBoost == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer(_G.BoostPoison)
+      end
+  end    
+})
+
+T6:AddToggle({
+  Name = "Use All Boost",
+  Default = false,
+  Callback = function(Value)
+  _G.UseAllBoost = Value
+    while wait() do
+      if _G.UseAllBoost == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Luck")
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Golden")
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Void")
+      end
+  end    
+})
+
+if PetDetect > 3 then
+Detection_A1:Set("Pet detection (in workspace)","The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.")
+Detection_A2:Set("Pet detection (in workspace)","The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.")
+else
+Detection_A1:Set("Pet detection (in workspace)",tostring(PetDetect) .. " (Private Server)")
+Detection_A2:Set("Pet detection (in workspace)",tostring(PetDetect) .. " (Private Server)")
+end

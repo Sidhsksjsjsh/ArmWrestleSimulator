@@ -51,9 +51,6 @@ local S5 = T4:AddSection({
 
 local Detection_A2 = S5:AddParagraph("Pet detection (in workspace)","#PET_DETECTION_ERROR")
 
-local PetDetect = 0
-PetDetect = #petIndex
-
 local T5 = Window:MakeTab({
 Name = "Teleport",
 Icon = "rbxassetid://0",

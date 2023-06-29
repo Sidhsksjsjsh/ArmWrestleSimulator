@@ -63,6 +63,13 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
+local T7 = Window:MakeTab({
+Name = "Event",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
+
 local workspace = game:GetService("Workspace")
 local npc = {}
 local zone = {}
@@ -626,6 +633,55 @@ T6:AddToggle({
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Luck")
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Golden")
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Void")
+      end
+  end    
+})
+
+--[[
+World 1: 
+Bully
+Teacher
+GymRat
+MafiaBoss
+Champion
+]]
+
+T7:AddToggle({
+  Name = "Auto Farm Event Egg",
+  Default = false,
+  Callback = function(Value)
+  _G.Event_AV1 = Value
+    while wait() do
+      if _G.Event_AV1 == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Bully",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Bully"],1)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Teacher",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Teacher"],1)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("GymRat",workspace.Zones["1"].Interactables.ArmWrestling.NPC["GymRat"],1)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("MafiaBoss",workspace.Zones["1"].Interactables.ArmWrestling.NPC["MafiaBoss"],1)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Champion",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Champion"],1)
+      end
+  end    
+})
+
+T7:AddToggle({
+  Name = "Auto Click",
+  Default = false,
+  Callback = function(Value)
+  _G.Event_AV2 = Value
+    while wait() do
+      if _G.Event_AV2 == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
+      end
+  end    
+})
+
+T7:AddToggle({
+  Name = "Auto Claim Summer Egg",
+  Default = false,
+  Callback = function(Value)
+  _G.Event_AV3 = Value
+    while wait() do
+      if _G.Event_AV3 == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EventService.RF.ClaimEgg:InvokeServer()
       end
   end    
 })

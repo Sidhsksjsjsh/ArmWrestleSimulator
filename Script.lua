@@ -15,6 +15,20 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
+function PlayerProxy(playername)
+if playername == "all" then
+for _,v in pairs(game.Players:GetPlayers()) do
+     return v.Name
+end
+else
+for i,v in pairs(game.Players:GetChildren()) do
+    if (string.sub(string.lower(v.Name),1,string.len(playername))) == string.lower(playername) then
+      return v.Name
+    end
+ end
+end
+end
+
 local T3 = Window:MakeTab({
 Name = "Wrestle",
 Icon = "rbxassetid://0",
@@ -581,6 +595,19 @@ T1:AddToggle({
       end
   end    
 })
+
+T1:AddToggle({
+  Name = "Spam Trade",
+  Default = false,
+  Callback = function(Value)
+  _G.SpamTrade = Value
+    while wait() do
+      if _G.SpamTrade == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TradingService.RF.sendTradeRequest:InvokeServer(game:GetService("Players")[PlayerProxy("all")])
+      end
+  end    
+})
+
 --[[
 T1:AddToggle({
   Name = "Auto Equip Dumbells",

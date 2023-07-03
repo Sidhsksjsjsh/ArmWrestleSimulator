@@ -673,17 +673,34 @@ MafiaBoss
 Champion
 ]]
 
+T7:AddSlider({
+  Name = "Farm Speed",
+  Min = 0,
+  Max = 20,
+  Default = 5,
+  Color = Color3.fromRGB(255,255,255),
+  Increment = 1,
+  ValueName = "%",
+  Callback = function(Value)
+   _G.EventSpeed = Value
+  end    
+})
+
 T7:AddToggle({
-  Name = "Auto Farm Event Egg",
+  Name = "Farm Zone 1",
   Default = false,
   Callback = function(Value)
   _G.Event_AV1 = Value
     while wait() do
       if _G.Event_AV1 == false then break end
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Bully",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Bully"],1)
+         wait(_G.EventSpeed)
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Teacher",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Teacher"],1)
+         wait(_G.EventSpeed)
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("GymRat",workspace.Zones["1"].Interactables.ArmWrestling.NPC["GymRat"],1)
+         wait(_G.EventSpeed)
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("MafiaBoss",workspace.Zones["1"].Interactables.ArmWrestling.NPC["MafiaBoss"],1)
+         wait(_G.EventSpeed)
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Champion",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Champion"],1)
       end
   end    
@@ -714,9 +731,9 @@ T7:AddToggle({
 })
 
 if PetDetect > 3 then
-Detection_A1:Set("Pet detection (in workspace)","The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.")
-Detection_A2:Set("Pet detection (in workspace)","The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.")
+Detection_A1:Set("The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.","Pet detection (in workspace)")
+Detection_A2:Set("The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.","Pet detection (in workspace)")
 else
-Detection_A1:Set("Pet detection (in workspace)",tostring(PetDetect) .. " (Private Server)")
-Detection_A2:Set("Pet detection (in workspace)",tostring(PetDetect) .. " (Private Server)")
+Detection_A1:Set(tostring(PetDetect) .. " (Private Server)","Pet detection (in workspace)")
+Detection_A2:Set(tostring(PetDetect) .. " (Private Server)","Pet detection (in workspace)")
 end

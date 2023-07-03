@@ -673,6 +673,8 @@ MafiaBoss
 Champion
 ]]
 
+local EventSpeed = 0
+
 T7:AddSlider({
   Name = "Farm Speed",
   Min = 0,
@@ -682,7 +684,7 @@ T7:AddSlider({
   Increment = 1,
   ValueName = "%",
   Callback = function(Value)
-   _G.EventSpeed = Value
+   EventSpeed = tonumber(Value)
   end    
 })
 
@@ -694,13 +696,13 @@ T7:AddToggle({
     while wait() do
       if _G.Event_AV1 == false then break end
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Bully",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Bully"],1)
-         wait(_G.EventSpeed)
+         wait(EventSpeed + 1)
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Teacher",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Teacher"],1)
-         wait(_G.EventSpeed)
+         wait(EventSpeed + 2)
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("GymRat",workspace.Zones["1"].Interactables.ArmWrestling.NPC["GymRat"],1)
-         wait(_G.EventSpeed)
+         wait(EventSpeed + 3)
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("MafiaBoss",workspace.Zones["1"].Interactables.ArmWrestling.NPC["MafiaBoss"],1)
-         wait(_G.EventSpeed)
+         wait(EventSpeed + 4)
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Champion",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Champion"],1)
       end
   end    

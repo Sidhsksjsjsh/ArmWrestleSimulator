@@ -717,7 +717,7 @@ T7:AddToggle({
   _G.Event_AV1 = Value
     while wait() do
       if _G.Event_AV1 == false then break end
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("KrakenBoss",workspace.Zones["2"].Interactables.ArmWrestling.NPC["KrakenBoss"],3)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("KrakenBoss",workspace.Zones["3"].Interactables.ArmWrestling.NPC["KrakenBoss"],3)
       end
   end    
 })

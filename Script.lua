@@ -82,7 +82,8 @@ Name = "Event",
 Icon = "rbxassetid://0",
 PremiumOnly = false
 })
-
+local Event_A3 = T7:AddParagraph("Event Eggs available","#EGG_ERROR")
+-- Event_A3:Set("","Event Eggs available")
 
 local workspace = game:GetService("Workspace")
 local npc = {}
@@ -745,6 +746,10 @@ T7:AddToggle({
       end
   end    
 })
+
+while wait() do
+Event_A3:Set(tostring(game.Players.LocalPlayer.PlayerGui.GameUI.Menus.Event.Amount.Text),"Event Eggs available")
+end
 
 if PetDetect > 3 then
 Detection_A1:Set("The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.","Pet detection (in workspace)")

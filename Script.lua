@@ -695,21 +695,29 @@ T7:AddSlider({
 })
 
 T7:AddToggle({
-  Name = "Farm Zone 1",
+  Name = "Farm Zone 2",
   Default = false,
   Callback = function(Value)
   _G.Event_AV1 = Value
     while wait() do
       if _G.Event_AV1 == false then break end
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Bully",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Bully"],1)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("ScrapTrader",workspace.Zones["2"].Interactables.ArmWrestling.NPC["ScrapTrader"],2)
          wait(EventSpeed + 1)
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Teacher",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Teacher"],1)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("CyberCop",workspace.Zones["2"].Interactables.ArmWrestling.NPC["CyberCop"],2)
          wait(EventSpeed + 2)
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("GymRat",workspace.Zones["1"].Interactables.ArmWrestling.NPC["GymRat"],1)
-         wait(EventSpeed + 3)
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("MafiaBoss",workspace.Zones["1"].Interactables.ArmWrestling.NPC["MafiaBoss"],1)
-         wait(EventSpeed + 4)
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("Champion",workspace.Zones["1"].Interactables.ArmWrestling.NPC["Champion"],1)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("SlicerAssasin",workspace.Zones["2"].Interactables.ArmWrestling.NPC["SlicerAssasin"],2)
+      end
+  end    
+})
+
+T7:AddToggle({
+  Name = "Farm Zone 3",
+  Default = false,
+  Callback = function(Value)
+  _G.Event_AV1 = Value
+    while wait() do
+      if _G.Event_AV1 == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer("KrakenBoss",workspace.Zones["2"].Interactables.ArmWrestling.NPC["KrakenBoss"],3)
       end
   end    
 })

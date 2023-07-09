@@ -101,9 +101,11 @@ AddTable(workspace.Zones,zone)
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["3"].Interactables.ArmWrestling.NPC,npc)
+AddTable(workspace.Zones["4"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.PVP,VSPLAYER)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.PVP,VSPLAYER)
 AddTable(workspace.Zones["3"].Interactables.ArmWrestling.PVP,VSPLAYER)
+AddTable(workspace.Zones["4"].Interactables.ArmWrestling.PVP,VSPLAYER)
 AddTable(workspace.PetFolder,petIndex)
 
 local PetDetect = #petIndex
@@ -147,8 +149,8 @@ local treadmill = {
 
 T6:AddDropdown({
    Name = "Select Boost",
-   Default = "Luck",
-   Options = {"Luck","Golden","Void"},
+   Default = "Wins",
+   Options = {"Wins","Luck","Golden","Void"},
    Callback = function(Value)
      _G.BoostPoison = Value
   end    
@@ -226,11 +228,14 @@ T5:AddButton({
         TPType(_G.TP_TYPE,CFrame.new(-10326,4,34))
     end
      if _G.zone_TP == "2" then
-        TPType(_G.TP_TYPE,CFrame.new(-10324,4,448))
+        TPType(_G.TP_TYPE,CFrame.new(-10324,4,637))
      end
      if _G.zone_TP == "3" then
         TPType(_G.TP_TYPE,CFrame.new(11599,10,-19))
     end
+     if _G.zone_TP == "4" then
+        TPType(_G.TP_TYPE,CFrame.new(-10274,4,-817))
+     end
   end    
 })
 
@@ -660,6 +665,7 @@ T6:AddToggle({
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Luck")
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Golden")
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Void")
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BoostService.RE.useBoost:FireServer("Wins")
       end
   end    
 })
@@ -721,7 +727,7 @@ T7:AddToggle({
 })
 
 T7:AddToggle({
-  Name = "Auto Claim Summer Egg",
+  Name = "Auto Claim Event Egg",
   Default = false,
   Callback = function(Value)
   _G.Event_AV3 = Value

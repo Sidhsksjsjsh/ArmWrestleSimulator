@@ -500,7 +500,7 @@ T4:AddToggle({
   end    
 })
 
-S4:AddToggle({
+T4:AddToggle({
   Name = "Auto Gold",
   Default = false,
   Callback = function(Value)
@@ -513,7 +513,7 @@ S4:AddToggle({
   end    
 })
 
-S5:AddToggle({
+T4:AddToggle({
   Name = "Auto Craft",
   Default = false,
   Callback = function(Value)

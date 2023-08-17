@@ -53,17 +53,17 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
-local S4 = T4:AddSection({
-     Name = "Golden (Use Private Server)"
-})
+--local S4 = T4:AddSection({
+--     Name = "Golden (Use Private Server)"
+--})
 
-local Detection_A1 = S4:AddParagraph("Pet detection (in workspace)","#PET_DETECTION_ERROR")
+--local Detection_A1 = S4:AddParagraph("Pet detection (in workspace)","#PET_DETECTION_ERROR")
 
-local S5 = T4:AddSection({
-     Name = "Craft (Use Private Server)"
-})
+--local S5 = T4:AddSection({
+--     Name = "Craft (Use Private Server)"
+--})
 
-local Detection_A2 = S5:AddParagraph("Pet detection (in workspace)","#PET_DETECTION_ERROR")
+--local Detection_A2 = S5:AddParagraph("Pet detection (in workspace)","#PET_DETECTION_ERROR")
 
 local T5 = Window:MakeTab({
 Name = "Teleport",
@@ -237,6 +237,9 @@ T5:AddButton({
      if _G.zone_TP == "4" then
         TPType(_G.TP_TYPE,CFrame.new(-10274,4,-817))
      end
+     if _G.zone_TP == "5" then
+        TPType(_G.TP_TYPE,CFrame.new(-10305,-4,-1417))
+      end
   end    
 })
 
@@ -327,7 +330,7 @@ S2:AddToggle({
   end    
 })
 
-local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam"}
+local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam","=[ Zone 4 ]=","Rust","Widget","Atom","Nuclear","Mutant","Iridescent","=[ Zone 5 ]=","TRex","Herbivore","Pterodactyl","Gem","DinoFossil","Mystic","=[ Limited Egg ]=","Limited"}
 
 T4:AddDropdown({
    Name = "Select EGG",
@@ -694,7 +697,7 @@ T7:AddSlider({
    EventSpeed = tonumber(Value)
   end    
 })
-
+--[[
 T7:AddToggle({
   Name = "Farm Zone 2",
   Default = false,
@@ -734,7 +737,7 @@ T7:AddToggle({
       end
   end    
 })
-
+]]
 T7:AddToggle({
   Name = "Auto Claim Event Egg",
   Default = false,
@@ -748,13 +751,15 @@ T7:AddToggle({
 })
 
 while wait() do
+if game.Players.LocalPlayer.PlayerGui.GameUI.Menus:FindFirstChild("Event") then
 Event_A3:Set(tostring(game.Players.LocalPlayer.PlayerGui.GameUI.Menus.Event.Amount.Text),"Event Eggs available")
 end
-
+end
+--[[
 if PetDetect > 3 then
 Detection_A1:Set("The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.","Pet detection (in workspace)")
 Detection_A2:Set("The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.","Pet detection (in workspace)")
 else
 Detection_A1:Set(tostring(PetDetect) .. " (Private Server)","Pet detection (in workspace)")
 Detection_A2:Set(tostring(PetDetect) .. " (Private Server)","Pet detection (in workspace)")
-end
+end]]

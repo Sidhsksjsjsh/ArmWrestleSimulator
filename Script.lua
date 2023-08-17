@@ -1,3 +1,6 @@
+--[[
+Sorry, it takes a long time
+]]
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = true, ConfigFolder = "TurtleFi"})
@@ -281,10 +284,11 @@ S1:AddToggle({
     while wait() do
       if _G.JoinW == false then break end
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onEnterNPCTable:FireServer(_G.AI,workspace.Zones[_G.zone_3].Interactables.ArmWrestling.NPC[_G.AI],_G.zone_3)
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
       end
   end    
 })
-
+--[[
 S1:AddToggle({
   Name = "Auto Click",
   Default = false,
@@ -295,7 +299,7 @@ S1:AddToggle({
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmWrestleService.RE.onClickRequest:FireServer()
       end
   end    
-})
+})]]
 
 S2:AddDropdown({
    Name = "Select Table",

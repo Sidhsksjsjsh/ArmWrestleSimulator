@@ -1,6 +1,68 @@
 --[[
 Sorry, it takes a long time
 ]]
+
+--[[
+--[[local args = {
+           [1] = _G.Egg,
+           [2] = {
+              ["Fox"] = rare.fox,
+              ["Slime"] = legendary.slime,
+              ["Bear"] = legendary.bear,
+              ["Deer"] = uncommon.deer,
+              ["Squirrel"] = common.squirrel,
+              ["WaterMage"] = mythical.watermage,
+              ["GrassMage"] = legendary.grassmage,
+              ["Spooky"] = unknown.spooky,
+              ["MagicMage"] = unknown.magicmage,
+              ["Monkey"] = legendary.monkey,
+              ["Parrot"] = uncommon.parot,
+              ["Tiger"] = legendary.tiger,
+              ["Elephant"] = mythical.elephant,
+              ["Cat"] = common.cat,
+              ["Dog"] = uncommon.dog,
+              ["Cow"] = uncommon.cow,
+              ["Mouse"] = legendary.mouse,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              [""] = ,
+              
+          }
+      }
+
+      game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(_G.Egg,{})
+]]
+
+local DeleteFuckingPet = nil
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+	local Method = getnamecallmethod()
+	local Args = {...}
+
+	if Method == 'InvokeServer' and self.Name == 'purchaseEgg' then
+DeleteFuckingPet = Args[2]
+end
+	return namecall(self, ...) 
+end)
+
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = true, ConfigFolder = "TurtleFi"})
@@ -55,6 +117,8 @@ Name = "Egg & Pet",
 Icon = "rbxassetid://0",
 PremiumOnly = false
 })
+
+T4:AddParagraph("New Feature","open the egg and choose the pet you want to choose for deletion")
 
 --local S4 = T4:AddSection({
 --     Name = "Golden (Use Private Server)"
@@ -495,7 +559,7 @@ T4:AddToggle({
           }
       }
 --]]
-      game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(_G.Egg,{})
+      game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(_G.Egg,DeleteFuckingPet)
       end
   end    
 })

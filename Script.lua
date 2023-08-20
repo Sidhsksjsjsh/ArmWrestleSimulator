@@ -2,52 +2,6 @@
 Sorry, it takes a long time
 ]]
 
---[[
---[[local args = {
-           [1] = _G.Egg,
-           [2] = {
-              ["Fox"] = rare.fox,
-              ["Slime"] = legendary.slime,
-              ["Bear"] = legendary.bear,
-              ["Deer"] = uncommon.deer,
-              ["Squirrel"] = common.squirrel,
-              ["WaterMage"] = mythical.watermage,
-              ["GrassMage"] = legendary.grassmage,
-              ["Spooky"] = unknown.spooky,
-              ["MagicMage"] = unknown.magicmage,
-              ["Monkey"] = legendary.monkey,
-              ["Parrot"] = uncommon.parot,
-              ["Tiger"] = legendary.tiger,
-              ["Elephant"] = mythical.elephant,
-              ["Cat"] = common.cat,
-              ["Dog"] = uncommon.dog,
-              ["Cow"] = uncommon.cow,
-              ["Mouse"] = legendary.mouse,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              
-          }
-      }
-
-      game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(_G.Egg,{})
-]]
-
 local DeleteFuckingPet = nil
 local mt = getrawmetatable(game);
 setreadonly(mt,false)
@@ -149,6 +103,13 @@ Name = "Event",
 Icon = "rbxassetid://0",
 PremiumOnly = false
 })
+
+local T8 = Window:MakeTab({
+Name = "Code",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
 local Event_A3 = T7:AddParagraph("Event Eggs available","#EGG_ERROR")
 -- Event_A3:Set("","Event Eggs available")
 
@@ -253,7 +214,7 @@ T5:AddDropdown({
 })
 
 T5:AddDropdown({
-   Name = "Select the teleportation type",
+   Name = "Select the teleport type",
    Default = "teleport",
    Options = {"teleport","tween"},
    Callback = function(Value)
@@ -289,6 +250,24 @@ T6:AddButton({ -- fake API, THE ORIGINAL API IS IN THE UI
   end    
 })
 --]]
+
+T8:AddButton({
+  Name = "Redeem all codes",
+  Callback = function()
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("noob")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("WEDNESDAY")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("FIXED")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("200m")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("enchant")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("Leagues")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("pinksandcastle")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("secret")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("gullible")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("knighty")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("axel")
+end
+})
+
 T5:AddButton({
   Name = "Teleport",
   Callback = function()
@@ -674,13 +653,13 @@ T1:AddToggle({
 })
 
 T1:AddToggle({
-  Name = "Spam Trade",
+  Name = "Spin lucky draw [Blueprint]",
   Default = false,
   Callback = function(Value)
-  _G.SpamTrade = Value
+  _G.blueprint = Value
     while wait() do
-      if _G.SpamTrade == false then break end
-         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TradingService.RF.sendTradeRequest:InvokeServer(game:GetService("Players")[PlayerProxy("all")])
+      if _G.blueprint == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BlueprintService.RF.LuckyDraw:InvokeServer(false)
       end
   end    
 })

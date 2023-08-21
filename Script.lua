@@ -110,6 +110,20 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
+local T9 = Window:MakeTab({
+Name = "Crate",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
+local S100 = T3:AddSection({
+     Name = "OPEN CRATE"
+})
+
+local S101 = T3:AddSection({
+     Name = "BUY CRATE"
+})
+
 local Event_A3 = T7:AddParagraph("Event Eggs available","#EGG_ERROR")
 -- Event_A3:Set("","Event Eggs available")
 
@@ -182,6 +196,64 @@ T6:AddDropdown({
    Options = {"Wins","Luck","Golden","Void"},
    Callback = function(Value)
      _G.BoostPoison = Value
+  end    
+})
+
+S100:AddDropdown({
+   Name = "Select Crate",
+   Default = "Rust",
+   Options = {"Rust","Silver","Gold","Diamond"},
+   Callback = function(Value)
+     _G.CrateSkins = Value
+  end    
+})
+
+S101:AddDropdown({
+   Name = "Select Crate",
+   Default = "Rust",
+   Options = {"Rust","Silver","Gold","Diamond"},
+   Callback = function(Value)
+     _G.BuyCrateSkins = Value
+  end    
+})
+
+S101:AddDropdown({
+   Name = "Select Amount",
+   Default = "1",
+   Options = {"1","5","100"},
+   Callback = function(Value)
+     _G.AmountCrate = Value
+  end    
+})
+
+S101:AddButton({
+  Name = "Buy Crate",
+  Callback = function()
+   game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmsService.RF.PurchaseCrates:InvokeServer(_G.BuyCrateSkins,_G.AmountCrate)
+end
+})
+
+S100:AddToggle({
+  Name = "Auto Roll Crate",
+  Default = false,
+  Callback = function(Value)
+  _G.RollSelectedCrate = Value
+    while wait() do
+      if _G.RollSelectedCrate == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmsService.RF.RollArmCrateForPlayer:InvokeServer(tostring(_G.CrateSkins) .. "Crate")
+      end
+  end    
+})
+
+S100:AddToggle({
+  Name = "Auto Roll All Crate",
+  Default = false,
+  Callback = function(Value)
+  _G.RollAllCrate = Value
+    while wait() do
+      if _G.RollAllCrate == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmsService.RF.RollAllCratesForPlayer:InvokeServer()
+      end
   end    
 })
 

@@ -116,11 +116,11 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
-local S100 = T3:AddSection({
+local S100 = T9:AddSection({
      Name = "OPEN CRATE"
 })
 
-local S101 = T3:AddSection({
+local S101 = T9:AddSection({
      Name = "BUY CRATE"
 })
 

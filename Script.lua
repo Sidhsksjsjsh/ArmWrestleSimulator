@@ -220,7 +220,7 @@ S101:AddDropdown({
 S101:AddDropdown({
    Name = "Select Amount",
    Default = "1",
-   Options = {"1","5","100"},
+   Options = {"1","10","100"},
    Callback = function(Value)
      _G.AmountCrate = Value
   end    
@@ -229,7 +229,7 @@ S101:AddDropdown({
 S101:AddButton({
   Name = "Buy Crate",
   Callback = function()
-   game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmsService.RF.PurchaseCrates:InvokeServer(_G.BuyCrateSkins,_G.AmountCrate)
+   game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmsService.RF.PurchaseCrates:InvokeServer(tostring(_G.BuyCrateSkins) .. "Crate",_G.AmountCrate)
 end
 })
 

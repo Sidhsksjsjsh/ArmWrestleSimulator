@@ -140,16 +140,23 @@ end
 end
 
 AddTable(workspace.Zones,zone)
-
+--[[
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["3"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["4"].Interactables.ArmWrestling.NPC,npc)
+AddTable(workspace.Zones["5"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.PVP,VSPLAYER)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.PVP,VSPLAYER)
 AddTable(workspace.Zones["3"].Interactables.ArmWrestling.PVP,VSPLAYER)
 AddTable(workspace.Zones["4"].Interactables.ArmWrestling.PVP,VSPLAYER)
+AddTable(workspace.Zones["5"].Interactables.ArmWrestling.PVP,VSPLAYER)
 AddTable(workspace.PetFolder,petIndex)
+--]]
+for i = 1, 5 do
+    AddTable(workspace.Zones[i].Interactables.ArmWrestling.NPC,npc)
+    AddTable(workspace.Zones[i].Interactables.ArmWrestling.PVP,VSPLAYER)
+end
 
 local PetDetect = #petIndex
 
@@ -353,6 +360,9 @@ T5:AddButton({
      if _G.zone_TP == "5" then
         TPType(_G.TP_TYPE,CFrame.new(-10305,-4,-1417))
       end
+     if _G.zone_TP == "AquaEvent" then
+        TPType(_G.TP_TYPE,CFrame.new(9500, 12, 125))
+     end
   end    
 })
 
@@ -444,7 +454,7 @@ S2:AddToggle({
   end    
 })
 
-local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam","=[ Zone 4 ]=","Rust","Widget","Atom","Nuclear","Mutant","Iridescent","=[ Zone 5 ]=","TRex","Herbivore","Pterodactyl","Gem","DinoFossil","Mystic","=[ Limited Egg ]=","Limited"}
+local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam","=[ Zone 4 ]=","Rust","Widget","Atom","Nuclear","Mutant","Iridescent","=[ Zone 5 ]=","TRex","Herbivore","Pterodactyl","Gem","DinoFossil","Mystic","=[ Aqua Event ]=","Shark","Crab","Jellyfish","=[ Limited Egg ]=","Limited"}
 
 T4:AddDropdown({
    Name = "Select EGG",

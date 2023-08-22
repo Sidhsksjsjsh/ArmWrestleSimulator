@@ -200,7 +200,7 @@ AddTable(workspace.PetFolder,petIndex)
 for i = 1, 5 do
     AddTable(workspace.Zones[i].Interactables.ArmWrestling.NPC,npc)
     AddTable(workspace.Zones[i].Interactables.ArmWrestling.PVP,VSPLAYER)
-    AddTable(workspace.Zones[i].Interactables.Teleports.Locations,locationIndex)
+    --AddTable(workspace.Zones[i].Interactables.Teleports.Locations,locationIndex)
 end
 AddTable(workspace.Zones["AquaEvent"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["AquaEvent"].Interactables.ArmWrestling.PVP,VSPLAYER)
@@ -334,7 +334,7 @@ S102:AddDropdown({
   end    
 })
 
-S103:AddDropdown({
+--[[S103:AddDropdown({
    Name = "Select Zone",
    Default = "1",
    Options = zone,
@@ -350,7 +350,7 @@ S103:AddDropdown({
    Callback = function(Value)
      _G.AreaPrototype = Value
   end    
-})
+})]]
 
 S102:AddDropdown({
    Name = "Select the teleport type",
@@ -431,7 +431,7 @@ S102:AddButton({
   end    
 })
 
-S103:AddButton({
+--[[S103:AddButton({
   Name = "Teleport",
   Callback = function()
   if _G.ZonePrototype == "AquaEvent" or _G.AreaPrototype == "Aqua" then
@@ -440,7 +440,7 @@ S103:AddButton({
     game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones[_G.ZonePrototype].Interactables.Teleports.Locations[_G.AreaPrototype])
  end
 end
-})
+})]]
 
 T2:AddDropdown({
   Name = "Select Punch Tier",

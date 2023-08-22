@@ -2,6 +2,41 @@
 Sorry, it takes a long time
 ]]
 
+_G.AutoDeleteWithTable = {
+   Earth = nil,
+   Icy = nil,
+   Blackhole = nil,
+   Lava = nil,
+   Molten = nil,
+   Crystal = nil,
+   Solar = nil,
+   Ice = nil,
+   Burning = nil,
+   Moon = nil,
+   Coconut = nil,
+   Palm = nil,
+   Treasure = nil,
+   Poseidon = nil,
+   KingFish = nil,
+   Clam = nil,
+   Rust = nil,
+   Widget = nil,
+   Atom = nil,
+   Nuclear = nil,
+   Mutant = nil,
+   Iridescent = nil,
+   TRex = nil,
+   Herbivore = nil,
+   Pterodactyl = nil,
+   Gem = nil,
+   DinoFossil = nil,
+   Mystic = nil,
+   Shark = nil,
+   Crab = nil,
+   Jellyfish = nil,
+   Limited = nil
+}
+
 local DeleteFuckingPet = nil
 local mt = getrawmetatable(game);
 setreadonly(mt,false)
@@ -12,7 +47,7 @@ mt.__namecall = newcclosure(function(self, ...)
 	local Args = {...}
 
 	if Method == 'InvokeServer' and self.Name == 'purchaseEgg' then
-DeleteFuckingPet = Args[2]
+        DeleteFuckingPet = Args[2]
 end
 	return namecall(self, ...) 
 end)
@@ -454,6 +489,41 @@ S2:AddToggle({
   end    
 })
 
+_G.AutoDeleteWithTable = {
+Earth = nil,
+Icy = nil,
+Blackhole = nil,
+Lava = nil,
+Molten = nil,
+Crystal = nil,
+Solar = nil,
+Ice = nil,
+Burning = nil,
+Moon = nil,
+Coconut = nil,
+Palm = nil,
+Treasure = nil,
+Poseidon = nil,
+KingFish = nil,
+Clam = nil,
+Rust = nil,
+Widget = nil,
+Atom = nil,
+Nuclear = nil,
+Mutant = nil,
+Iridescent = nil,
+TRex = nil,
+Herbivore = nil,
+Pterodactyl = nil,
+Gem = nil,
+DinoFossil = nil,
+Mystic = nil,
+Shark = nil,
+Crab = nil,
+Jellyfish = nil,
+Limited = nil
+}
+
 local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam","=[ Zone 4 ]=","Rust","Widget","Atom","Nuclear","Mutant","Iridescent","=[ Zone 5 ]=","TRex","Herbivore","Pterodactyl","Gem","DinoFossil","Mystic","=[ Aqua Event ]=","Shark","Crab","Jellyfish","=[ Limited Egg ]=","Limited"}
 
 T4:AddDropdown({
@@ -567,55 +637,18 @@ T4:AddToggle({
 })
 --]]
 T4:AddToggle({
-  Name = "Auto Hatch",
+  Name = "Auto Hatch [Auto Save Deleted Pet List]",
   Default = false,
   Callback = function(Value)
   _G.Balls = Value
     while wait() do
       if _G.Balls == false then break end
-         --[[local args = {
-           [1] = _G.Egg,
-           [2] = {
-              ["Fox"] = rare.fox,
-              ["Slime"] = legendary.slime,
-              ["Bear"] = legendary.bear,
-              ["Deer"] = uncommon.deer,
-              ["Squirrel"] = common.squirrel,
-              ["WaterMage"] = mythical.watermage,
-              ["GrassMage"] = legendary.grassmage,
-              ["Spooky"] = unknown.spooky,
-              ["MagicMage"] = unknown.magicmage,
-              ["Monkey"] = legendary.monkey,
-              ["Parrot"] = uncommon.parot,
-              ["Tiger"] = legendary.tiger,
-              ["Elephant"] = mythical.elephant,
-              ["Cat"] = common.cat,
-              ["Dog"] = uncommon.dog,
-              ["Cow"] = uncommon.cow,
-              ["Mouse"] = legendary.mouse,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              [""] = ,
-              
-          }
-      }
---]]
-      game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(_G.Egg,DeleteFuckingPet)
+	  if _G.AutoDeleteWithTable[_G.Egg] == nil then
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(_G.Egg,DeleteFuckingPet)
+	 _G.AutoDeleteWithTable[_G.Egg] = DeleteFuckingPet
+	else
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.purchaseEgg:InvokeServer(_G.Egg,_G.AutoDeleteWithTable[_G.Egg])
+	end
       end
   end    
 })

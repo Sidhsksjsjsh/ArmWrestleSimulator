@@ -245,15 +245,10 @@ S100:AddToggle({
   end    
 })
 
-S100:AddToggle({
-  Name = "Auto Roll All Crate",
-  Default = false,
-  Callback = function(Value)
-  _G.RollAllCrate = Value
-    while wait() do
-      if _G.RollAllCrate == false then break end
+S100:AddButton({
+  Name = "Roll All Crates",
+  Callback = function()
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ArmsService.RF.RollAllCratesForPlayer:InvokeServer()
-      end
   end    
 })
 

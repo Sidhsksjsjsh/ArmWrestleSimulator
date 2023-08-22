@@ -127,6 +127,14 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
+local S102 = T5:AddSection({
+     Name = "Teleport V1"
+})
+
+local S103 = T5:AddSection({
+     Name = "Teleport V2"
+})
+
 local T6 = Window:MakeTab({
 Name = "Boost",
 Icon = "rbxassetid://0",
@@ -168,6 +176,7 @@ local zone = {}
 local egg = {}
 local VSPLAYER = {}
 local petIndex = {}
+local locationIndex = {}
 function AddTable(Table_V,LocalName)
 for _,v in pairs(Table_V:GetChildren()) do
     table.insert(LocalName,v.Name)
@@ -191,7 +200,10 @@ AddTable(workspace.PetFolder,petIndex)
 for i = 1, 5 do
     AddTable(workspace.Zones[i].Interactables.ArmWrestling.NPC,npc)
     AddTable(workspace.Zones[i].Interactables.ArmWrestling.PVP,VSPLAYER)
+    AddTable(workspace.Zones[i].Interactables.Teleports.Locations,locationIndex)
 end
+AddTable(workspace.Zones["AquaEvent"].Interactables.ArmWrestling.NPC,npc)
+AddTable(workspace.Zones["AquaEvent"].Interactables.ArmWrestling.PVP,VSPLAYER)
 
 local PetDetect = #petIndex
 
@@ -313,7 +325,7 @@ S3:AddDropdown({
   end    
 })
 
-T5:AddDropdown({
+S102:AddDropdown({
    Name = "Select Zone",
    Default = "1",
    Options = zone,
@@ -322,7 +334,25 @@ T5:AddDropdown({
   end    
 })
 
-T5:AddDropdown({
+S103:AddDropdown({
+   Name = "Select Zone",
+   Default = "1",
+   Options = zone,
+   Callback = function(Value)
+     _G.ZonePrototype = Value
+  end    
+})
+
+S103:AddDropdown({
+   Name = "Select Area",
+   Default = "Beach",
+   Options = locationIndex,
+   Callback = function(Value)
+     _G.AreaPrototype = Value
+  end    
+})
+
+S102:AddDropdown({
    Name = "Select the teleport type",
    Default = "teleport",
    Options = {"teleport","tween"},
@@ -377,7 +407,7 @@ T8:AddButton({
 end
 })
 
-T5:AddButton({
+S102:AddButton({
   Name = "Teleport",
   Callback = function()
      if _G.zone_TP == "1" then
@@ -399,6 +429,17 @@ T5:AddButton({
         TPType(_G.TP_TYPE,CFrame.new(9500, 12, 125))
      end
   end    
+})
+
+S103:AddButton({
+  Name = "Teleport",
+  Callback = function()
+  if _G.ZonePrototype == "AquaEvent" or _G.AreaPrototype == "Aqua" then
+     game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones.AquaEvent.Interactables.Teleports.Locations.Aqua)
+  else
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones[_G.ZonePrototype].Interactables.Teleports.Locations[_G.AreaPrototype])
+ end
+end
 })
 
 T2:AddDropdown({
@@ -488,7 +529,7 @@ S2:AddToggle({
       end
   end    
 })
-
+--[[
 _G.AutoDeleteWithTable = {
 Earth = nil,
 Icy = nil,
@@ -523,7 +564,7 @@ Crab = nil,
 Jellyfish = nil,
 Limited = nil
 }
-
+]]
 local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam","=[ Zone 4 ]=","Rust","Widget","Atom","Nuclear","Mutant","Iridescent","=[ Zone 5 ]=","TRex","Herbivore","Pterodactyl","Gem","DinoFossil","Mystic","=[ Aqua Event ]=","Shark","Crab","Jellyfish","=[ Limited Egg ]=","Limited"}
 
 T4:AddDropdown({

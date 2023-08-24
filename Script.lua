@@ -568,7 +568,7 @@ Jellyfish = nil,
 Limited = nil
 }
 ]]
-local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam","=[ Zone 4 ]=","Rust","Widget","Atom","Nuclear","Mutant","Iridescent","=[ Zone 5 ]=","TRex","Herbivore","Pterodactyl","Gem","DinoFossil","Mystic","=[ Aqua Event ]=","Shark","Crab","Jellyfish","=[ Limited Egg ]=","Limited"}
+local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam","=[ Zone 4 ]=","Rust","Widget","Atom","Nuclear","Mutant","Iridescent","=[ Zone 5 ]=","TRex","Herbivore","Pterodactyl","Gem","DinoFossil","Mystic","=[ Aqua Event ]=","Shark","Crab","Jellyfish","=[ Limited Egg ]=","[ Has ended ]"}
 
 T4:AddDropdown({
    Name = "Select EGG",
@@ -807,13 +807,25 @@ T1:AddToggle({
 })
 
 T1:AddToggle({
-  Name = "Spin lucky draw [Blueprint]",
+  Name = "Auto spin lucky draw [Blueprint]",
   Default = false,
   Callback = function(Value)
   _G.blueprint = Value
     while wait() do
       if _G.blueprint == false then break end
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BlueprintService.RF.LuckyDraw:InvokeServer(false)
+      end
+  end    
+})
+
+T1:AddToggle({
+  Name = "Auto spin daily lucky draw [Blueprint]",
+  Default = false,
+  Callback = function(Value)
+  _G.dailyblueprint = Value
+    while wait() do
+      if _G.dailyblueprint == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BlueprintService.RF.LuckyDraw:InvokeServer(true)
       end
   end    
 })

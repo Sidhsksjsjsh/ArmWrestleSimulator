@@ -202,8 +202,11 @@ for i = 1, 5 do
     AddTable(workspace.Zones[i].Interactables.ArmWrestling.PVP,VSPLAYER)
     --AddTable(workspace.Zones[i].Interactables.Teleports.Locations,locationIndex)
 end
+
+if workspace.Zones:FindFirstChild("AquaEvent") then
 AddTable(workspace.Zones["AquaEvent"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["AquaEvent"].Interactables.ArmWrestling.PVP,VSPLAYER)
+end
 
 local PetDetect = #petIndex
 
@@ -882,7 +885,7 @@ Champion
 ]]
 
 local EventSpeed = 0
-
+--[[
 T7:AddSlider({
   Name = "Farm Speed",
   Min = 0,
@@ -936,6 +939,16 @@ T7:AddToggle({
   end    
 })
 ]]
+
+T7:AddDropdown({
+   Name = "Number of previous hatches on eggs",
+   Default = "1",
+   Options = {"1","2","3"},
+   Callback = function(Value)
+     _G.AmountPrevEggs = Value
+   end    
+})
+
 T7:AddToggle({
   Name = "Auto Claim Event Egg",
   Default = false,
@@ -946,6 +959,18 @@ T7:AddToggle({
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EventService.RF.ClaimEgg:InvokeServer()
       end
   end    
+})
+
+T7:AddToggle({
+  Name = "Auto Hatch Previous Eggs",
+  Default = false,
+  Callback = function(Value)
+  _G.PrevEgg = Value
+    while wait() do
+      if _G.PrevEgg == false then break end
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EventService.RF.ClaimEgg:InvokeServer(tonumber(_G.AmountPrevEggs),true)
+    end
+end
 })
 
 while wait() do

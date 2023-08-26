@@ -83,6 +83,16 @@ for i,v in pairs(game.Players:GetChildren()) do
 end
 end
 
+function FuncBypass(TypeName,toggle)
+if TypeName == "GameplayPaused" then
+if toggle == true then
+	game:GetService("GuiService"):SetGameplayPausedNotificationEnabled(false)
+else
+	game:GetService("GuiService"):SetGameplayPausedNotificationEnabled(true)
+end
+end
+end
+
 local T3 = Window:MakeTab({
 Name = "Wrestle",
 Icon = "rbxassetid://0",
@@ -167,10 +177,17 @@ local S101 = T9:AddSection({
      Name = "BUY CRATE"
 })
 
+local T10 = Window:MakeTab({
+Name = "Game",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
 local Event_A3 = T7:AddParagraph("Event Eggs available","#EGG_ERROR")
 -- Event_A3:Set("","Event Eggs available")
 
 local workspace = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
 local npc = {}
 local zone = {}
 local egg = {}
@@ -421,6 +438,7 @@ S102:AddButton({
      end
      if _G.zone_TP == "3" then
         TPType(_G.TP_TYPE,CFrame.new(11599,10,-19))
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones["3"].Interactables.Teleports.Locations.Beach)
     end
      if _G.zone_TP == "4" then
         TPType(_G.TP_TYPE,CFrame.new(-10274,4,-817))
@@ -430,6 +448,7 @@ S102:AddButton({
       end
      if _G.zone_TP == "AquaEvent" then
         TPType(_G.TP_TYPE,CFrame.new(9500, 12, 125))
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones.AquaEvent.Interactables.Teleports.Locations.Aqua)
      end
   end    
 })
@@ -830,6 +849,18 @@ T1:AddToggle({
   end    
 })
 
+--T1:AddToggle({
+--  Name = "Auto Claim Daily Login",
+--  Default = false,
+--  Callback = function(Value)
+--  _G.dailylogin = Value
+--    while wait() do
+--      if _G.dailylogin == false then break end
+--         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BlueprintService.RF.LuckyDraw:InvokeServer(true)
+--      end
+--  end    
+--})
+
 --[[
 T1:AddToggle({
   Name = "Auto Equip Dumbells",
@@ -955,7 +986,7 @@ T7:AddToggle({
 T7:AddDropdown({
    Name = "Number of previous hatches on eggs",
    Default = "1",
-   Options = {"1","2","3"},
+   Options = {"1","2","3","8"},
    Callback = function(Value)
      _G.AmountPrevEggs = Value
    end    
@@ -985,11 +1016,19 @@ T7:AddToggle({
 end
 })
 
-while wait() do
+T10:AddToggle({
+  Name = "Bypass Gameplay-Paused",
+  Default = false,
+  Callback = function(Value)
+	FuncBypass("GameplayPaused",Value)
+end
+})
+
+RunService.RenderStepped:Connect(function()
 if game.Players.LocalPlayer.PlayerGui.GameUI.Menus:FindFirstChild("Event") then
 Event_A3:Set(tostring(game.Players.LocalPlayer.PlayerGui.GameUI.Menus.Event.Amount.Text),"Event Eggs available")
 end
-end
+end)
 --[[
 if PetDetect > 3 then
 Detection_A1:Set("The number of Pets exceeds 3 \nplease go to the private server \nto use this feature.","Pet detection (in workspace)")

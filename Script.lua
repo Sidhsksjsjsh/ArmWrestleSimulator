@@ -1,5 +1,7 @@
 --[[
 Sorry, it takes a long time
+
+Turtle Hub V3.89 - Sunday 27th August, 2023 (Latest Updates)
 ]]
 
 _G.AutoDeleteWithTable = {
@@ -424,6 +426,7 @@ T8:AddButton({
     game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("gullible")
     game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("knighty")
     game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("axel")
+    game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.CodeRedemptionService.RE.onRedeem:FireServer("THANKSFOR400M")
 end
 })
 

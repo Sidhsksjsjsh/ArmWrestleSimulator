@@ -276,7 +276,7 @@ T6:AddDropdown({
 S100:AddDropdown({
    Name = "Select Crate",
    Default = "Rust",
-   Options = {"Rust","Silver","Gold","Diamond"},
+   Options = {"Rust","Silver","Gold","Diamond","Emerald"},
    Callback = function(Value)
      _G.CrateSkins = Value
   end    
@@ -285,7 +285,7 @@ S100:AddDropdown({
 S101:AddDropdown({
    Name = "Select Crate",
    Default = "Rust",
-   Options = {"Rust","Silver","Gold","Diamond"},
+   Options = {"Rust","Silver","Gold","Diamond","Emerald"},
    Callback = function(Value)
      _G.BuyCrateSkins = Value
   end    
@@ -432,9 +432,11 @@ S102:AddButton({
   Callback = function()
      if _G.zone_TP == "1" then
         TPType(_G.TP_TYPE,CFrame.new(-10326,4,34))
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones["1"].Interactables.Teleports.Locations.BackToSchool)
     end
      if _G.zone_TP == "2" then
         TPType(_G.TP_TYPE,CFrame.new(-10324,4,637))
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones["2"].Interactables.Teleports.Locations.Futuristic)
      end
      if _G.zone_TP == "3" then
         TPType(_G.TP_TYPE,CFrame.new(11599,10,-19))
@@ -442,6 +444,7 @@ S102:AddButton({
     end
      if _G.zone_TP == "4" then
         TPType(_G.TP_TYPE,CFrame.new(-10274,4,-817))
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones["4"].Interactables.Teleports.Locations.NuclearBunker)
      end
      if _G.zone_TP == "5" then
         TPType(_G.TP_TYPE,CFrame.new(-10305,-4,-1417))
@@ -587,7 +590,7 @@ Jellyfish = nil,
 Limited = nil
 }
 ]]
-local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam","=[ Zone 4 ]=","Rust","Widget","Atom","Nuclear","Mutant","Iridescent","=[ Zone 5 ]=","TRex","Herbivore","Pterodactyl","Gem","DinoFossil","Mystic","=[ Aqua Event ]=","Shark","Crab","Jellyfish","=[ Limited Egg ]=","[ Has ended ]"}
+local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=","Molten","Crystal","Solar","Ice","Burning","Moon","=[ Zone 3 ]=","Coconut","Palm","Treasure","Poseidon","KingFish","Clam","=[ Zone 4 ]=","Rust","Widget","Atom","Nuclear","Mutant","Iridescent","=[ Zone 5 ]=","TRex","Herbivore","Pterodactyl","Gem","DinoFossil","Mystic","=[ Aqua Event ]=","Shark","Crab","Jellyfish","=[ Limited Egg ]=","[ Has Ended ]"}
 
 T4:AddDropdown({
    Name = "Select EGG",
@@ -821,6 +824,8 @@ T1:AddToggle({
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TimedRewardService.RE.onClaim:FireServer("10")
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TimedRewardService.RE.onClaim:FireServer("11")
          game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TimedRewardService.RE.onClaim:FireServer("12")
+	 game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TimedRewardService.RE.onClaim:FireServer("13")
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.TimedRewardService.RE.onClaim:FireServer("14")
       end
   end    
 })
@@ -849,17 +854,17 @@ T1:AddToggle({
   end    
 })
 
---T1:AddToggle({
---  Name = "Auto Claim Daily Login",
---  Default = false,
---  Callback = function(Value)
---  _G.dailylogin = Value
---    while wait() do
---      if _G.dailylogin == false then break end
---         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.BlueprintService.RF.LuckyDraw:InvokeServer(true)
---      end
---  end    
---})
+T1:AddToggle({
+  Name = "Auto Claim Daily Login",
+  Default = false,
+  Callback = function(Value)
+  _G.dailylogin = Value
+    while wait() do
+      if _G.dailylogin == false then break end
+         game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.DailyRewardService.RE.onClaimReward:FireServer()
+      end
+  end    
+})
 
 --[[
 T1:AddToggle({

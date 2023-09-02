@@ -222,9 +222,9 @@ for i = 1, 5 do
     --AddTable(workspace.Zones[i].Interactables.Teleports.Locations,locationIndex)
 end
 
-if workspace.Zones:FindFirstChild("AquaEvent") then
-AddTable(workspace.Zones["AquaEvent"].Interactables.ArmWrestling.NPC,npc)
-AddTable(workspace.Zones["AquaEvent"].Interactables.ArmWrestling.PVP,VSPLAYER)
+if workspace.Zones:FindFirstChild("GreekEvent") then
+AddTable(workspace.Zones["GreekEvent"].Interactables.ArmWrestling.NPC,npc)
+AddTable(workspace.Zones["GreekEvent"].Interactables.ArmWrestling.PVP,VSPLAYER)
 end
 
 local PetDetect = #petIndex
@@ -452,9 +452,9 @@ S102:AddButton({
      if _G.zone_TP == "5" then
         TPType(_G.TP_TYPE,CFrame.new(-10305,-4,-1417))
       end
-     if _G.zone_TP == "AquaEvent" then
+     if _G.zone_TP == "GreekEvent" then
         TPType(_G.TP_TYPE,CFrame.new(9500, 12, 125))
-	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones.AquaEvent.Interactables.Teleports.Locations.Aqua)
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones.GreekEvent.Interactables.Teleports.Locations.Greek)
      end
   end    
 })

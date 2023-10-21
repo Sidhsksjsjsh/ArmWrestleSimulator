@@ -252,6 +252,7 @@ for _,fire in pairs(workspace:GetDescendants()) do
 		fireproximityprompt(fire)
 	end
 end
+end
 
 --[[
 T1:AddToggle({

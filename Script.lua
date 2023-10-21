@@ -179,6 +179,12 @@ local S101 = T9:AddSection({
      Name = "BUY CRATE"
 })
 
+local T11 = Window:MakeTab({
+Name = "Pet PXP/XP",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
 local T10 = Window:MakeTab({
 Name = "Game",
 Icon = "rbxassetid://0",
@@ -240,11 +246,12 @@ for i=1,10 do
 fireproximityprompt(workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.ProximityPrompt)
 end
 end)
+
 ]]
 
 function ProximityEvent()
 for _,fire in pairs(workspace:GetDescendants()) do
-	if fire:IsA("PromixityPrompt") and fire.Parent == "Attachment" then
+	if fire:IsA("PromixityPrompt") then
 		fire.Enabled = true
 		fire.HoldDuration = 0
 		fire.MaxActivationDistance = 1230
@@ -1057,12 +1064,94 @@ T10:AddToggle({
 end
 })
 
-T10:AddToggle({
-  Name = "Tick Or Treat All House",
-  Default = false,
-  Callback = function(Value)
+T10:AddButton({
+Name = "Trick Or Treat All House",
+Callback = function()
 	ProximityEvent()
 end
+})
+
+--[[
+local s,e = pcall(function()
+workspace.game["MilBase Map"].Hood.AntiCheat:Destroy()
+workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.ProximityPrompt.Enabled = true
+workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.ProximityPrompt.HoldDuration= 0
+workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.ProximityPrompt.MaxActivationDistance = 1230
+game.Players.LocalPlayer.Character:PivotTo(workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.CFrame)
+for i=1,10 do
+fireproximityprompt(workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.ProximityPrompt)
+end
+end)
+
+
+function ProximityButton(str)
+for _,proximity in pairs(workspace:GetDescendants()) do
+	if proximity:IsA("ProximityPrompt") then
+		if str == "enabled" then
+			proximity.Enabled = true
+		elseif str == "Duration" then
+			proximity.HoldDuration= 0
+		elseif str == "Distance" then
+			proximity.MaxActivationDistance = 1230
+		elseif str == "fire" then
+			fireproximityprompt(proximity)
+		end
+	end
+end
+end
+]]
+
+function ProximityButtonBypass()
+for _,proximity in pairs(workspace:GetDescendants()) do
+	if proximity:IsA("ProximityPrompt") then
+		proximity.Enabled = true
+		proximity.HoldDuration= 0
+		proximity.MaxActivationDistance = 1230
+	end
+end
+end
+
+T10:AddButton({
+   Name = "Bypass all ProximityPrompt Button Duration",
+   Callback = function()
+	ProximityButtonBypass()
+end})
+
+T11:AddSlider({
+   Name = "Food Amount",
+   Min = 0,
+   Max = 1000,
+   Default = 1,
+   Color = Color3.fromRGB(255,255,255),
+   Increment = 1,
+   ValueName = "Food",
+   Callback = function(Value)
+     _G._FoodUses = Value
+  end    
+})
+
+T11:AddToggle({
+   Name = "Use Mushroom",
+   Default = false,
+   Callback = function(Value)
+     _G._Mushroom = Value
+	while wait() do
+		if _G._Mushroom == false then break end
+			game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["SnackService"]["RF"]["redeemSnack"]:InvokeServer("Mushroom",tonumber(_G._FoodUses))		
+	end
+  end    
+})
+
+T11:AddToggle({
+   Name = "Use Green Apple",
+   Default = false,
+   Callback = function(Value)
+     _G._Green_Apple = Value
+	while wait() do
+		if _G._Green_Apple == false then break end
+			game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["SnackService"]["RF"]["redeemSnack"]:InvokeServer("GreenApple",tonumber(_G._FoodUses))
+	end
+  end    
 })
 
 RunService.RenderStepped:Connect(function()

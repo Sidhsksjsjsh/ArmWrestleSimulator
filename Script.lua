@@ -190,6 +190,7 @@ local Event_A3 = T7:AddParagraph("Event Eggs available","#EGG_ERROR")
 
 local workspace = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local npc = {}
 local zone = {}
 local egg = {}
@@ -203,6 +204,7 @@ end
 end
 
 AddTable(workspace.Zones,zone)
+AddTable(ReplicatedStorage.Eggs,egg)
 --[[
 AddTable(workspace.Zones["1"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["2"].Interactables.ArmWrestling.NPC,npc)
@@ -222,12 +224,34 @@ for i = 1, 5 do
     --AddTable(workspace.Zones[i].Interactables.Teleports.Locations,locationIndex)
 end
 
-if workspace.Zones:FindFirstChild("GreekEvent") then
-AddTable(workspace.Zones["GreekEvent"].Interactables.ArmWrestling.NPC,npc)
-AddTable(workspace.Zones["GreekEvent"].Interactables.ArmWrestling.PVP,VSPLAYER)
+if workspace.Zones:FindFirstChild("HalloweenWorld") then
+AddTable(workspace.Zones["HalloweenWorld"].Interactables.ArmWrestling.NPC,npc)
+AddTable(workspace.Zones["HalloweenWorld"].Interactables.ArmWrestling.PVP,VSPLAYER)
 end
 
-local PetDetect = #petIndex
+--[[
+local s,e = pcall(function()
+workspace.game["MilBase Map"].Hood.AntiCheat:Destroy()
+workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.ProximityPrompt.Enabled = true
+workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.ProximityPrompt.HoldDuration= 0
+workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.ProximityPrompt.MaxActivationDistance = 1230
+game.Players.LocalPlayer.Character:PivotTo(workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.CFrame)
+for i=1,10 do
+fireproximityprompt(workspace.game["MilBase Map"].Hood.Stuff.TrainingHood.ProximityPrompt)
+end
+end)
+]]
+
+function ProximityEvent()
+for _,fire in pairs(workspace:GetDescendants()) do
+	if fire:IsA("PromixityPrompt") and fire.Parent == "Attachment" then
+		fire.Enabled = true
+		fire.HoldDuration = 0
+		fire.MaxActivationDistance = 1230
+		wait(0.1)
+		fireproximityprompt(fire)
+	end
+end
 
 --[[
 T1:AddToggle({
@@ -452,9 +476,9 @@ S102:AddButton({
      if _G.zone_TP == "5" then
         TPType(_G.TP_TYPE,CFrame.new(-10305,-4,-1417))
       end
-     if _G.zone_TP == "GreekEvent" then
+     if _G.zone_TP == "HalloweenWorld" then
         TPType(_G.TP_TYPE,CFrame.new(9500, 12, 125))
-	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones.GreekEvent.Interactables.Teleports.Locations.Greek)
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ZoneService.RE.teleport:FireServer(workspace.Zones.HalloweenWorld.Interactables.Teleports.Locations.Halloween)
      end
   end    
 })
@@ -598,7 +622,7 @@ local dislist = {"=[ Zone 1 ]=","Earth","Icy","Blackhole","Lava","=[ Zone 2 ]=",
 T4:AddDropdown({
    Name = "Select EGG",
    Default = "Earth",
-   Options = dislist,
+   Options = egg,
    Callback = function(Value)
      _G.Egg = Value
    end    
@@ -1029,6 +1053,14 @@ T10:AddToggle({
   Default = false,
   Callback = function(Value)
 	FuncBypass("GameplayPaused",Value)
+end
+})
+
+T10:AddToggle({
+  Name = "Tick Or Treat All House",
+  Default = false,
+  Callback = function(Value)
+	ProximityEvent()
 end
 })
 

@@ -224,7 +224,7 @@ for i = 1, 5 do
     --AddTable(workspace.Zones[i].Interactables.Teleports.Locations,locationIndex)
 end
 
-if workspace.Zones:FindFirstChild("HalloweenWorld") then
+if workspace.Zones:FindFirstChild("nope") then
 AddTable(workspace.Zones["HalloweenWorld"].Interactables.ArmWrestling.NPC,npc)
 AddTable(workspace.Zones["HalloweenWorld"].Interactables.ArmWrestling.PVP,VSPLAYER)
 end

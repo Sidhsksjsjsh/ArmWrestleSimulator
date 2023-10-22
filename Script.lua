@@ -252,10 +252,6 @@ end)
 function ProximityEvent()
 for _,fire in pairs(workspace:GetDescendants()) do
 	if fire:IsA("PromixityPrompt") then
-		fire.Enabled = true
-		fire.HoldDuration = 0
-		fire.MaxActivationDistance = 1230
-		wait(0.1)
 		fireproximityprompt(fire)
 	end
 end
@@ -1101,12 +1097,26 @@ end
 end
 ]]
 
-function ProximityButtonBypass()
+function ProximityButtonDuration()
+for _,proximity in pairs(workspace:GetDescendants()) do
+	if proximity:IsA("ProximityPrompt") then
+		proximity.HoldDuration = 0
+	end
+end
+end
+
+function ProximityButtonDistance()
+for _,proximity in pairs(workspace:GetDescendants()) do
+	if proximity:IsA("ProximityPrompt") then
+		proximity.MaxActivationDistance = 1230
+	end
+end
+end
+
+function ProximityTrigger()
 for _,proximity in pairs(workspace:GetDescendants()) do
 	if proximity:IsA("ProximityPrompt") then
 		proximity.Enabled = true
-		proximity.HoldDuration= 0
-		proximity.MaxActivationDistance = 1230
 	end
 end
 end
@@ -1114,7 +1124,25 @@ end
 T10:AddButton({
    Name = "Bypass all ProximityPrompt Button Duration",
    Callback = function()
-	ProximityButtonBypass()
+	ProximityButtonDuration()
+end})
+
+T10:AddButton({
+   Name = "Bypass all ProximityPrompt Button Distance",
+   Callback = function()
+	ProximityButtonDistance()
+end})
+
+T10:AddButton({
+   Name = "Trigger All ProximityButton (V1)",
+   Callback = function()
+	ProximityTrigger()
+end})
+
+T10:AddButton({
+   Name = "Trigger All ProximityButton (V2)",
+   Callback = function()
+	ProximityEvent()
 end})
 
 T11:AddSlider({

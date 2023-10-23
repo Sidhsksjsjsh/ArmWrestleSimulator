@@ -1292,7 +1292,7 @@ Icon = "rbxassetid://0",
 PremiumOnly = false
 })
 
-local BlockInfo = T13:AddParagraph("Lucky Block : nil","#CONTENT_ERROR")
+local BlockInfo = T13:AddParagraph("Lucky Block Detector","#CONTENT_ERROR")
 
 local function Toolshit(name)
 if name == "Grips" then
@@ -1371,7 +1371,7 @@ end
 end
 
 local function B_7_6()
-for _,i in pairs(workspace:GetChildren()) do
+for _,i in pairs(workspace.Zones.HalloweenWorld.Interactables.TrickOrTreat:GetChildren()) do
 	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["TrickOrTreatService"]["RE"]["onTrickOrTreat"]:FireServer(i)
 end
 end
@@ -1394,7 +1394,7 @@ T14:AddToggle({
   end    
 })
 
-T14:AddToggle({
+--[[T14:AddToggle({
    Name = "Auto Ghost / Pedestrian",
    Default = false,
    Callback = function(Value)
@@ -1417,7 +1417,7 @@ T14:AddToggle({
 	end
   end    
 })
-
+]]
 RunService.RenderStepped:Connect(function()
 if game.Players.LocalPlayer.PlayerGui.GameUI.Menus:FindFirstChild("Event") then
 Event_A3:Set(tostring(game.Players.LocalPlayer.PlayerGui.GameUI.Menus.Event.Amount.Text),"Event Eggs available")
@@ -1426,9 +1426,9 @@ end)
 
 RunService.RenderStepped:Connect(function()
 if workspace:FindFirstChild("LuckyBlock") then
-   BlockInfo:Set(string.format("%s\n%s\n%s",GetText(workspace.LuckyBlock.BillboardGui.Frame.Title),GetText(workspace.LuckyBlock.BillboardGui.Frame.Timer),GetText(workspace.LuckyBlock.BillboardGui.Frame.GainX)),"Lucky Block : Detected")
+   BlockInfo:Set(string.format("%s\n%s\n%s",GetText(workspace.LuckyBlock.BillboardGui.Frame.Title),GetText(workspace.LuckyBlock.BillboardGui.Frame.Timer),GetText(workspace.LuckyBlock.BillboardGui.Frame.GainX)),"")
 else
-   BlockInfo:Set("#SNIPING \nwe are looking for lucky block","Lucky Block : nil")
+   BlockInfo:Set("#SNIPING \nwe are looking for lucky block","")
 end
 end)
 --[[

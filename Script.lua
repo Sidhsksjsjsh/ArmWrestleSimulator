@@ -1125,6 +1125,14 @@ for _,proximity in pairs(workspace:GetDescendants()) do
 end
 end
 
+function ProximityShow()
+for _,proximity in pairs(workspace:GetDescendants()) do
+	if proximity:IsA("ProximityPrompt") then
+		proximity:Show()
+	end
+end
+end
+
 T10:AddButton({
    Name = "Bypass all ProximityPrompt Button Duration",
    Callback = function()
@@ -1138,15 +1146,15 @@ T10:AddButton({
 end})
 
 T10:AddButton({
-   Name = "Trigger All ProximityButton (V1)",
+   Name = "Enabled All ProximityButton",
    Callback = function()
 	ProximityTrigger()
 end})
 
 T10:AddButton({
-   Name = "Trigger All ProximityButton (V2)",
+   Name = "Show All ProximityButton",
    Callback = function()
-	ProximityEvent()
+	ProximityShow()
 end})
 
 T11:AddSlider({
@@ -1186,10 +1194,31 @@ T11:AddToggle({
   end    
 })
 
+T11:AddToggle({
+   Name = "Use Godly Bones",
+   Default = false,
+   Callback = function(Value)
+     _G._Godly_Bones = Value
+	while wait() do
+		if _G._Godly_Bones == false then break end
+			game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["SnackService"]["RF"]["redeemSnack"]:InvokeServer("GodlyBones",tonumber(_G._FoodUses))
+	end
+  end    
+})
+
 local T12 = Window:MakeTab({
 Name = "Tool",
 Icon = "rbxassetid://0",
 PremiumOnly = false
+})
+
+T12:AddDropdown({
+   Name = "Select Zone",
+   Default = "1",
+   Options = zone,
+   Callback = function(Value)
+     _G._shitty_zone = Value
+  end    
 })
 
 local SA1 = T12:AddSection({
@@ -1212,18 +1241,9 @@ OrionLib:AddTable(ReplicatedStorage.Tools.Grips,grips)
 OrionLib:AddTable(ReplicatedStorage.Tools.Dumbells,dumbells)
 OrionLib:AddTable(ReplicatedStorage.Tools.Barbells,barbells)
 
-T12:AddDropdown({
-   Name = "Select Zone",
-   Default = "1",
-   Options = zone,
-   Callback = function(Value)
-     _G._shitty_zone = Value
-  end    
-})
-
 SA1:AddDropdown({
    Name = "Select Grips",
-   Default = "5000Kg",
+   Default = "1Kg",
    Options = grips,
    Callback = function(Value)
      _G._grips = Value
@@ -1232,7 +1252,7 @@ SA1:AddDropdown({
 
 SA2:AddDropdown({
    Name = "Select Dumbells",
-   Default = "5000Kg",
+   Default = "1Kg",
    Options = dumbells,
    Callback = function(Value)
      _G._dumbells = Value
@@ -1326,6 +1346,74 @@ T13:AddToggle({
 		  if SnipeLuckyBlock() then
 			OrionLib:Teleport(workspace:FindFirstChild("LuckyBlock"))
 		end
+	end
+  end    
+})
+
+local T14 = Window:MakeTab({
+Name = "Halloween",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
+local function Interact_All_Shit()
+for _,i in pairs(workspace:GetChildren()) do
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["PumpkinService"]["RE"]["onDamagePumpkin"]:FireServer(i)
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["TrickOrTreatService"]["RE"]["onTrickOrTreat"]:FireServer(i)
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["PedestrianService"]["RE"]["onDamagePedestrian"]:FireServer(i)
+end
+end
+
+local function B_7_5()
+for _,i in pairs(workspace:GetChildren()) do
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["PumpkinService"]["RE"]["onDamagePumpkin"]:FireServer(i)
+end
+end
+
+local function B_7_6()
+for _,i in pairs(workspace:GetChildren()) do
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["TrickOrTreatService"]["RE"]["onTrickOrTreat"]:FireServer(i)
+end
+end
+
+local function B_7_7()
+for _,i in pairs(workspace:GetChildren()) do
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["PedestrianService"]["RE"]["onDamagePedestrian"]:FireServer(i)
+end
+end
+
+T14:AddToggle({
+   Name = "Auto Trick Or Treat",
+   Default = false,
+   Callback = function(Value)
+     _G._ToT = Value
+	while wait() do
+		if _G._ToT == false then break end
+		  B_7_6()
+	end
+  end    
+})
+
+T14:AddToggle({
+   Name = "Auto Ghost / Pedestrian",
+   Default = false,
+   Callback = function(Value)
+     _G._demon = Value
+	while wait() do
+		if _G._demon == false then break end
+		  B_7_7()
+	end
+  end    
+})
+
+T14:AddToggle({
+   Name = "Auto Pumpkin",
+   Default = false,
+   Callback = function(Value)
+     _G._pumpkin = Value
+	while wait() do
+		if _G._pumpkin == false then break end
+		  B_7_5()
 	end
   end    
 })

@@ -253,11 +253,13 @@ end)
 
 ]]
 
-function ProximityEvent()
-for _,fire in pairs(workspace:GetDescendants()) do
-	if fire:IsA("PromixityPrompt") then
-		fireproximityprompt(fire)
-	end
+local function B_7_6()
+for _,i in pairs(workspace.Zones.HalloweenWorld.Interactables.TrickOrTreat:GetChildren()) do
+	if workspace.Zones.HalloweenWorld.Interactables.TrickOrTreat[i].BillboardGui.Frame.Title.Text == "TRICK OR TREAT!" then
+	    game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["TrickOrTreatService"]["RE"]["onTrickOrTreat"]:FireServer(i)
+	else
+	    CreateDialogue("Cooldown","all houses are cooling off, please wait " .. tostring(GetText(workspace.Zones.HalloweenWorld.Interactables.TrickOrTreat[i].BillboardGui.Frame.Title)) .. " to start trick or treat.")
+end
 end
 end
 
@@ -1067,7 +1069,7 @@ end
 T10:AddButton({
 Name = "Trick Or Treat All House",
 Callback = function()
-	ProximityEvent()
+	B_7_6()
 end
 })
 
@@ -1367,12 +1369,6 @@ end
 local function B_7_5()
 for _,i in pairs(workspace:GetChildren()) do
 	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["PumpkinService"]["RE"]["onDamagePumpkin"]:FireServer(i)
-end
-end
-
-local function B_7_6()
-for _,i in pairs(workspace.Zones.HalloweenWorld.Interactables.TrickOrTreat:GetChildren()) do
-	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["TrickOrTreatService"]["RE"]["onTrickOrTreat"]:FireServer(i)
 end
 end
 

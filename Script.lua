@@ -209,6 +209,10 @@ for _,v in pairs(Table_V:GetChildren()) do
 end
 end
 
+function GetText(str)
+	return str.Text
+end
+
 AddTable(workspace.Zones,zone)
 AddTable(ReplicatedStorage.Eggs,egg)
 --[[
@@ -1182,9 +1186,161 @@ T11:AddToggle({
   end    
 })
 
+local T12 = Window:MakeTab({
+Name = "Tool",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
+local SA1 = T12:AddSection({
+     Name = "Grips"
+})
+
+local SA2 = T12:AddSection({
+     Name = "Dumbells"
+})
+
+local SA3 = T12:AddSection({
+     Name = "Barbells"
+})
+
+local grips = {}
+local dumbells = {}
+local barbells = {}
+
+OrionLib:AddTable(ReplicatedStorage.Tools.Grips,grips)
+OrionLib:AddTable(ReplicatedStorage.Tools.Dumbells,dumbells)
+OrionLib:AddTable(ReplicatedStorage.Tools.Barbells,barbells)
+
+T12:AddDropdown({
+   Name = "Select Zone",
+   Default = "1",
+   Options = zone,
+   Callback = function(Value)
+     _G._shitty_zone = Value
+  end    
+})
+
+SA1:AddDropdown({
+   Name = "Select Grips",
+   Default = "5000Kg",
+   Options = grips,
+   Callback = function(Value)
+     _G._grips = Value
+  end    
+})
+
+SA2:AddDropdown({
+   Name = "Select Dumbells",
+   Default = "5000Kg",
+   Options = dumbells,
+   Callback = function(Value)
+     _G._dumbells = Value
+  end    
+})
+
+SA3:AddDropdown({
+   Name = "Select Barbells",
+   Default = "Tier1",
+   Options = barbells,
+   Callback = function(Value)
+     _G._barbells = Value
+  end    
+})
+
+SA1:AddButton({
+   Name = "Equip Grips",
+   Callback = function()
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["ToolService"]["RE"]["onGuiEquipRequest"]:FireServer(_G._shitty_zone,"Grips",_G._grips)
+end})
+
+SA2:AddButton({
+   Name = "Equip Dumbells",
+   Callback = function()
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["ToolService"]["RE"]["onGuiEquipRequest"]:FireServer(_G._shitty_zone,"Dumbells",_G._dumbells)
+end})
+
+SA3:AddButton({
+   Name = "Equip Barbells",
+   Callback = function()
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["ToolService"]["RE"]["onEquipRequest"]:FireServer(tonumber(_G._shitty_zone),"Barbells",_G._barbells)
+end})
+
+local T13 = Window:MakeTab({
+Name = "Lucky Block",
+Icon = "rbxassetid://0",
+PremiumOnly = false
+})
+
+local BlockInfo = T13:AddParagraph("Lucky Block : nil","#CONTENT_ERROR")
+
+local function Toolshit(name)
+if name == "Grips" then
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["ToolService"]["RE"]["onGuiEquipRequest"]:FireServer(_G._shitty_zone,"Grips",_G._grips)
+elseif name == "Dumbells" then
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["ToolService"]["RE"]["onGuiEquipRequest"]:FireServer(_G._shitty_zone,"Dumbells",_G._dumbells)
+elseif name == "Barbells" then
+	game:GetService("ReplicatedStorage")["Packages"]["_Index"]:FindFirstChild("sleitnick_knit@1.4.7")["knit"]["Services"]["ToolService"]["RE"]["onEquipRequest"]:FireServer(tonumber(_G._shitty_zone),"Barbells",_G._barbells)
+else
+	CreateDialogue("Invalid Tool",'Cant find tool with name "' .. name .. '"')
+end
+end
+
+local function SnipeLuckyBlock()
+	if workspace:FindFirstChild("LuckyBlock") then
+		return true
+	end
+	return false
+end
+
+T13:AddDropdown({
+   Name = "Select Tool",
+   Default = "Grips",
+   Options = {"Grips","Dumbells","Barbells"},
+   Callback = function(Value)
+     _G._Selected_Tool = Value
+  end    
+})
+
+T13:AddToggle({
+   Name = "Auto Use Selected Tool",
+   Default = false,
+   Callback = function(Value)
+     _G._kajaksjsksjskFUCK = Value
+     Toolshit(_G._Selected_Tool)
+
+	while wait() do
+		if _G._kajaksjsksjskFUCK == false then break end
+			game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.ToolService.RE.onClick:FireServer()
+	end
+  end    
+})
+
+T13:AddToggle({
+   Name = "Auto Teleport",
+   Default = false,
+   Callback = function(Value)
+     _G._TP_Sniping = Value
+	while wait() do
+		if _G._TP_Sniping == false then break end
+		  if SnipeLuckyBlock() then
+			OrionLib:Teleport(workspace:FindFirstChild("LuckyBlock"))
+		end
+	end
+  end    
+})
+
 RunService.RenderStepped:Connect(function()
 if game.Players.LocalPlayer.PlayerGui.GameUI.Menus:FindFirstChild("Event") then
 Event_A3:Set(tostring(game.Players.LocalPlayer.PlayerGui.GameUI.Menus.Event.Amount.Text),"Event Eggs available")
+end
+end)
+
+RunService.RenderStepped:Connect(function()
+if workspace:FindFirstChild("LuckyBlock") then
+   BlockInfo:Set(string.format("%s\n%s\n%s",GetText(workspace.LuckyBlock.BillboardGui.Frame.Title),GetText(workspace.LuckyBlock.BillboardGui.Frame.Timer),GetText(workspace.LuckyBlock.BillboardGui.Frame.GainX)),"Lucky Block : Detected")
+else
+   BlockInfo:Set("#SNIPING \nwe are looking for lucky block","Lucky Block : nil")
 end
 end)
 --[[
